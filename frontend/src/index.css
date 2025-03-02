@@ -4,16 +4,34 @@
 @import "tailwindcss";
 
 @layer base {
-  [data-theme="original"] {
-    --color-bg: #475569;
+    :root {
+	* {
+	    padding: 0;
+	    margin: 0;
+	    box-sizing: border-box;
+	 }
 
-    --color-text-logo: #A5F3FC;
-    --color-text-primary: #FFFFFF;
+	 .trim {
+	    line-height: 1 !important;
+	 }
 
-    --size-text-heading: 1.6rem;
-    --size-text-medium: 1.1rem;
+	 .trim:nth-of-type(1) {
+	     line-height: .6 !important;
+	 }
+    }
 
-    --font-family-heading: 'Montserrat', sans-serif;
-    --font-family-text: 'Poppins', sans-serif;
-  }
+    [data-theme="original"] {
+	--color-bg: #475569;
+
+	--color-text-logo: #A5F3FC;
+	--color-text-primary: #FFFFFF;
+	--color-text-secondary: #D1D5DB;
+
+	--size-text-heading: 1.6rem;
+	--size-text-medium: 1.1rem;
+	--size-text-paragraph: 1rem;
+
+	--font-family-heading: 'Montserrat', sans-serif;
+	--font-family-text: 'Poppins', sans-serif;
+    }
 }
