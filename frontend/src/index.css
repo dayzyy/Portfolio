@@ -11,6 +11,10 @@
 	    box-sizing: border-box;
 	 }
 
+	 .hl {     /*Highlight for development*/
+	     border: 1px solid blue;
+	 }
+
 	 .trim {
 	    line-height: 1 !important;
 	 }
@@ -26,11 +30,15 @@
 
     [data-theme="original"] {
 	--color-bg: #475569;
+	--color-bg-card: #64748B;
 
 	--color-text-logo: #A5F3FC;
 	--color-text-primary: #FFFFFF;
 	--color-text-secondary: #D1D5DB;
 	--color-text-paragraph: #DBEAFE;
+	--color-text-icon: #0F172A;
+
+	--color-icon-lang: #1F2937;
 
 	--size-text-heading: 1.6rem;
 	--size-text-medium: 1.1rem;
