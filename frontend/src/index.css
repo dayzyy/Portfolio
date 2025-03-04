@@ -55,15 +55,58 @@
 	 font-weight: bold;
      }
 
-     svg:is(.small){
+     svg:is(.socials){
 	 color: var(--color-text-logo);
 	 font-size: 1.4rem;
+	 opacity: 0;
+	 animation: fade-in 1s ease 1s forwards;
      }
 
-     /*Transitions-Animations*/
+     svg:is(.socials):nth-of-type(2) {animation-delay: 1.1s;}
+     svg:is(.socials):nth-of-type(3) {animation-delay: 1.2s;}
+     svg:is(.socials):nth-of-type(4) {animation-delay: 1.3s;}
+
      #logo h1{
 	 color: var(--color-text-logo);
      }
+
+     #intro {
+	 animation: slide-left .4s ease forwards;
+     }
+
+     #about {
+	 transform: translateX(100vw);
+	 animation: slide-left .4s ease .1s forwards;
+     }
+
+     #location > *{
+	 transform: translateY(-100vh);
+	 animation: slide-down .4s ease .7s forwards;
+     }
+
+     #location > svg {
+	 animation-delay: .6s;
+     }
+
+     #CV {
+	 animation: scale-up .3s ease 1s forwards;
+     }
+
+     @keyframes slide-left {
+	 from {
+	     transform: translateX(100vw);
+	 }
+
+	 to {
+	     transform: translateX(0);
+	 }
+     }
+
+     @keyframes slide-down { to {transform: translateY(0);} }
+
+     @keyframes fade-in { to {opacity: 1;} }
+
+     @keyframes scale-up { to {scale: 1;} }
 
     [data-theme="original"] {
 	--color-bg: #475569;
