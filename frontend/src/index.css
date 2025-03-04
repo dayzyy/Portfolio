@@ -11,54 +11,59 @@
 
 	--font-family-heading: 'Montserrat', sans-serif;
 	--font-family-text: 'Poppins', sans-serif;
-
-	* {
-	    padding: 0;
-	    margin: 0;
-	    box-sizing: border-box;
-	 }
-
-	 .hl {     /*Highlight for development*/
-	     border: 1px solid blue;
-	 }
-
-	 .trim {
-	    line-height: 1 !important;
-	 }
-
-	 .trim:nth-of-type(1) {
-	     line-height: .9 !important;
-	 }
-
-	 .trim:nth-of-type(3) {
-	     line-height: 1.4 !important;
-	 }
-
-	 p {
-	     color: var(--color-text-primary);
-	     font-family: var(--font-family-text);
-	     font-size: var(--size-text-paragraph);
-	 }
-
-	 h1 {
-	     color: var(--color-text-primary);
-	     font-family: var(--font-family-heading);
-	     font-size: var(--size-text-heading);
-	     font-weight: bold;
-	 }
-
-	 h2 {
-	     color: var(--color-text-primary);
-	     font-family: var(--font-family-text);
-	     font-size: var(--size-text-medium);
-	     font-weight: bold;
-	 }
-
-	 svg:is(.small){
-	     color: var(--color-text-logo);
-	     font-size: 1.4rem;
-	 }
     }
+
+    * {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+     }
+
+    .hl {     /*Highlight for development*/
+	 border: 1px solid blue;
+     }
+
+     .trim {
+	line-height: 1 !important;
+     }
+
+     .trim:nth-of-type(1) {
+	 line-height: .9 !important;
+     }
+
+     .trim:nth-of-type(3) {
+	 line-height: 1.4 !important;
+     }
+
+     p {
+	 color: var(--color-text-primary);
+	 font-family: var(--font-family-text);
+	 font-size: var(--size-text-paragraph);
+     }
+
+     h1 {
+	 color: var(--color-text-primary);
+	 font-family: var(--font-family-heading);
+	 font-size: var(--size-text-heading);
+	 font-weight: bold;
+     }
+
+     h2 {
+	 color: var(--color-text-primary);
+	 font-family: var(--font-family-text);
+	 font-size: var(--size-text-medium);
+	 font-weight: bold;
+     }
+
+     svg:is(.small){
+	 color: var(--color-text-logo);
+	 font-size: 1.4rem;
+     }
+
+     /*Transitions-Animations*/
+     #logo h1{
+	 color: var(--color-text-logo);
+     }
 
     [data-theme="original"] {
 	--color-bg: #475569;

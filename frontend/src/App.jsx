@@ -16,7 +16,7 @@ export default function App() {
     return (
 	<main className="bg-[var(--color-bg)]">
 	    <div className="min-h-screen min-w-screen p-4 flex flex-col gap-16">
-		<header className="flex-grow-0 flex justify-between items-center">
+		<header className="flex-grow-0 flex justify-between items-center overflow-x-hidden">
 		    <Logo/>
 		    <CV/>
 		</header>
@@ -37,9 +37,11 @@ export default function App() {
 		    </div>
 		</section>
 
-		<section className="flex-grow flex flex-col gap-4">
-		    <h1>Languages and frameworks im proficient in</h1>
-		    <Skills/>
+		<section className="flex-grow flex md:justify-center">
+		    <div className="flex flex-col gap-4">
+			<h1>Languages and frameworks im proficient in</h1>
+			<Skills/>
+		    </div>
 		</section>
 	    </div>
 	</main>
