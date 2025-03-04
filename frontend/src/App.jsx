@@ -17,7 +17,7 @@ export default function App() {
 	<main className="bg-[var(--color-bg)]">
 	    <div className="min-h-screen min-w-screen p-4 flex flex-col gap-16">
 		<header className="flex-grow-0 flex justify-between items-center">
-		    <h1 style={{fontSize: 'var(--size-text-heading)', fontFamily: 'var(--font-family-heading)'}} className="text-[var(--color-text-logo)]  font-bold"><Logo/></h1>
+		    <Logo/>
 		    <CV/>
 		</header>
 
@@ -26,19 +26,19 @@ export default function App() {
 			<div className="flex items-center justify-between">
 			    <div className="flex flex-col gap-0">
 				<p className="trim text-[#a5f3fc]">hi, i am</p>
-				<p style={{fontSize: 'var(--size-text-heading)'}} className="trim text-[var(--color-text-primary)] font-bold">Luka Mania</p>
-				<p style={{fontSize: 'var(--size-text-medium)'}} className="trim text-[var(--color-text-secondary)] font-bold" >Web Developer</p>
+				<h1 className="trim">Luka Mania</h1>
+				<h2 className="trim text-[var(--color-text-secondary)]">Web Developer</h2>
 			    </div>
 
 			    <Information/>
 			</div>
 
-			<p style={{fontSize: 'var(--size-text-paragraph)', fontFamily: 'var(--font-family-text)'}} className="text-[var(--color-text-paragraph)] leading-snug">A passionate web developer with a focus on creating intuitive, user-friendly digital experiences. I specialize in front-end development with React, and I’m always eager to explore new technologies and innovative design solutions. My goal is to build functional and visually appealing websites that not only meet user needs but also deliver exceptional performance.</p>
+			<p className="text-[var(--color-text-paragraph)] leading-snug">A passionate web developer with a focus on creating intuitive, user-friendly digital experiences. I specialize in front-end development with React, and I’m always eager to explore new technologies and innovative design solutions. My goal is to build functional and visually appealing websites that not only meet user needs but also deliver exceptional performance.</p>
 		    </div>
 		</section>
 
 		<section className="flex-grow flex flex-col gap-4">
-		    <p style={{fontSize: 'var(--size-text-heading)'}} className="text-[var(--color-text-primary)] font-bold">Languages and frameworks im proficient in</p>
+		    <h1>Languages and frameworks im proficient in</h1>
 		    <Skills/>
 		</section>
 	    </div>

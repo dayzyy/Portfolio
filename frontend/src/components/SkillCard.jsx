@@ -7,7 +7,7 @@ export default function SkillCard({skill}) {
 
 
 	    <div style={{fontSize: 'var(--size-text-medium)'}} className="self-start text-[var(--color-text-icon)] font-bold">
-		{skill.language}
+		<h2 className="text-[var(--color-text-icon)]">{skill.language}</h2>
 	    </div>
 	</div>
     )
