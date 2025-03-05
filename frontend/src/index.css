@@ -59,50 +59,61 @@
 	 color: var(--color-text-logo);
 	 font-size: 1.4rem;
 	 opacity: 0;
-	 animation: fade-in 1s ease 1s forwards;
+	 animation: fade-in 1s ease 2s forwards;
      }
 
-     svg:is(.socials):nth-of-type(2) {animation-delay: 1.1s;}
-     svg:is(.socials):nth-of-type(3) {animation-delay: 1.2s;}
-     svg:is(.socials):nth-of-type(4) {animation-delay: 1.3s;}
+     svg:is(.socials):nth-of-type(2) {animation-delay: 2.1s;}
+     svg:is(.socials):nth-of-type(3) {animation-delay: 2.2s;}
+     svg:is(.socials):nth-of-type(4) {animation-delay: 2.3s;}
 
      #logo h1{
 	 color: var(--color-text-logo);
      }
 
      #intro {
-	 animation: slide-left .4s ease forwards;
+	 transform: translateX(100vw);
+	 animation: slide-x .4s ease 1s forwards;
      }
 
      #about {
 	 transform: translateX(100vw);
-	 animation: slide-left .4s ease .1s forwards;
+	 animation: slide-x .4s ease 1.1s forwards;
      }
 
-     #location > *{
+     #location > * {
 	 transform: translateY(-100vh);
-	 animation: slide-down .4s ease .7s forwards;
+	 animation: slide-y .4s ease 1.5s forwards;
      }
 
      #location > svg {
-	 animation-delay: .6s;
+	 animation-duration: .4s;
+	 animation-delay: 1.75s;
      }
 
      #CV {
-	 animation: scale-up .3s ease 1s forwards;
+	 animation: scale-up .3s ease 1.3s forwards;
      }
 
-     @keyframes slide-left {
-	 from {
-	     transform: translateX(100vw);
-	 }
-
-	 to {
-	     transform: translateX(0);
-	 }
+     #skills > h1 {
+	transform: translateX(-100vw);
+	animation: slide-x .4s ease 1.8s forwards;
      }
 
-     @keyframes slide-down { to {transform: translateY(0);} }
+     .skillcard {
+	transform: translateY(100vh);
+	animation: slide-y .4s ease 1.9s forwards;
+     }
+
+     .skillcard:nth-of-type(2) {animation-delay: 2s;}
+     .skillcard:nth-of-type(3) {animation-delay: 2.1s;}
+     .skillcard:nth-of-type(4) {animation-delay: 2.2s;}
+     .skillcard:nth-of-type(5) {animation-delay: 2.3s;}
+     .skillcard:nth-of-type(6) {animation-delay: 2.4s;}
+     .skillcard:nth-of-type(7) {animation-delay: 2.5s;}
+
+     @keyframes slide-x { to {transform: translateX(0);} }
+
+     @keyframes slide-y { to {transform: translateY(0);} }
 
      @keyframes fade-in { to {opacity: 1;} }
 
