@@ -111,16 +111,52 @@
      .skillcard:nth-of-type(6) {animation-delay: 2.4s;}
      .skillcard:nth-of-type(7) {animation-delay: 2.5s;}
 
-     .work svg {
-	 animation: fade-out .5s ease infinite;
+     #work > p {
+	 transform: translateY(100vh);
+	 animation: slide-y .4s ease 2.6s forwards;
      }
 
-    .work svg:nth-child(2) {
-	animation-delay: .2s;
+     #work svg {
+	 opacity: 0;
+	 animation: fade-out .5s ease 2.7s infinite;
+     }
+
+    #work svg:nth-child(2) {
+	animation-delay: 2.9s;
     }
 
-    .work svg:nth-child(3) {
-	animation-delay: .3s;
+    #work svg:nth-child(3) {
+	animation-delay: 3s;
+    }
+
+    #project-box {
+	position: relative;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding: 20px;
+	border: 1px solid var(--color-text-secondary);
+	border-right: none;
+	border-left: none;
+	transition: .5s ease;
+	transition: border-color .35s ease;
+    }
+
+    #project-box > p {
+	max-width: 80%;
+	color: var(--color-text-paragraph);
+	transition: .4s ease;
+    }
+
+    #about-p > svg {
+	color: var(--color-text-secondary);
+	font-size: 1.3rem;
+	transition: .2s ease;
+    }
+
+    .open-box {
+	border-bottom: 1px solid rgba(0, 0, 0, 0);
     }
 
      @keyframes slide-x { to {transform: translateX(0);} }

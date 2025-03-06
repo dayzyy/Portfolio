@@ -5,6 +5,7 @@ import CV from "./components/CV.jsx"
 import Information from "./components/Information.jsx"
 import Skills from "./components/Skills.jsx"
 import SeeWork from "./components/SeeWork.jsx"	
+import Projects from "./components/Projects.jsx"
 
 export default function App() {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'original')
@@ -16,7 +17,7 @@ export default function App() {
   
     return (
 	<main className="bg-[var(--color-bg)] overflow-hidden">
-	    <div className="min-h-screen min-w-screen p-4 flex flex-col gap-16">
+	    <div className="min-h-screen w-screen p-4 flex flex-col gap-16">
 		<header className="flex-grow-0 flex justify-between items-center">
 		    <Logo/>
 		    <CV/>
@@ -47,6 +48,12 @@ export default function App() {
 
 		<section className="w-full flex justify-end">
 		    <SeeWork/>
+		</section>
+	    </div>
+
+	    <div className="w-screen pb-[8rem] p-4 flex">
+		<section className="w-full flex flex-col items-center gap-12">
+		    <Projects/>
 		</section>
 	    </div>
 	</main>
