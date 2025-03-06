@@ -24,15 +24,15 @@
      }
 
      .trim {
-	line-height: 1 !important;
+	line-height: 1;
      }
 
-     .trim:nth-of-type(1) {
-	 line-height: .9 !important;
+     .trim:nth-child(1) {
+	 line-height: .9;
      }
 
-     .trim:nth-of-type(3) {
-	 line-height: 1.4 !important;
+     .trim:nth-child(3) {
+	 line-height: 1;
      }
 
      p {
@@ -87,11 +87,11 @@
 
      #location > svg {
 	 animation-duration: .4s;
-	 animation-delay: 1.75s;
+	 animation-delay: 1.4s;
      }
 
      #CV {
-	 animation: scale-up .3s ease 1.3s forwards;
+	 animation: scale-up .3s ease 2.8s forwards;
      }
 
      #skills > h1 {
@@ -111,11 +111,25 @@
      .skillcard:nth-of-type(6) {animation-delay: 2.4s;}
      .skillcard:nth-of-type(7) {animation-delay: 2.5s;}
 
+     .work svg {
+	 animation: fade-out .5s ease infinite;
+     }
+
+    .work svg:nth-child(2) {
+	animation-delay: .2s;
+    }
+
+    .work svg:nth-child(3) {
+	animation-delay: .3s;
+    }
+
      @keyframes slide-x { to {transform: translateX(0);} }
 
      @keyframes slide-y { to {transform: translateY(0);} }
 
      @keyframes fade-in { to {opacity: 1;} }
+
+     @keyframes fade-out { from {opacity: 1;} to {opacity: 0;} }
 
      @keyframes scale-up { to {scale: 1;} }
 

@@ -4,6 +4,7 @@ import Logo from "./components/Logo.jsx"
 import CV from "./components/CV.jsx"
 import Information from "./components/Information.jsx"
 import Skills from "./components/Skills.jsx"
+import SeeWork from "./components/SeeWork.jsx"	
 
 export default function App() {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'original')
@@ -42,6 +43,10 @@ export default function App() {
 			<h1>Languages and frameworks im proficient in</h1>
 			<Skills/>
 		    </div>
+		</section>
+
+		<section className="w-full flex justify-end">
+		    <SeeWork/>
 		</section>
 	    </div>
 	</main>
