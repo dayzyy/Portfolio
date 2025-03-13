@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react"
-
 import Logo from "./components/Logo.jsx"
 import CV from "./components/CV.jsx"
 import Information from "./components/Information.jsx"
@@ -55,7 +54,7 @@ export default function App() {
 		<section className="w-full flex flex-col items-center gap-12">
 		    <Projects/>
 		</section>
-	    </div>
+	    </div> 
 	</main>
     )
 }

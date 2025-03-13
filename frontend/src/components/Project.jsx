@@ -1,28 +1,44 @@
 import { useEffect, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 
-export default function Project({name, description}) {
+export default function Project({name, description, screenshots}) {
     const [showAbout, setShowABout] = useState(false)
-    const [inTransition, setInTransition] = useState(false)
-
-    useEffect(_ => {
-	setInTransition(true)
-    }, [])
+    const [offScreen, setOffScreen] = useState(true)
+    const [inFocus, setInFocus] = useState(0)
+    const [focusToggler, setFocusToggler] = useState(null)
 
     const handle_click = _ => {
 	setShowABout(prev => {
 	    if (prev) {
 		setTimeout(_ => {
-		    setInTransition(true)
-		}, 180)
+		    setOffScreen(true)
+		}, 200)
 	    }
-	    else setInTransition(false)
+	    else setOffScreen(false)
 	    return !prev
 	})
+	setInFocus(0)
     }
 
+    useEffect(() => {
+	if (!showAbout) {
+	    setFocusToggler(prev => {
+		if (prev) clearInterval(prev)
+		return null
+	    })
+	    return
+	}
+
+	const interval = setInterval( _ => {
+	    setInFocus(prev => (prev !== screenshots.length - 1 ? prev + 1 : 0))
+	}, 2000)
+	setFocusToggler(interval)
+
+	return _ => clearInterval(interval)
+    }, [showAbout])
+
     return (
-	<div id="project-box" className={`${showAbout && 'border-b-transparent'}`}>
+	<div className={`project-box ${showAbout ? 'open-box' : ''}`}>
 	    <div onClick={handle_click} className={`w-full flex justify-between items-center cursor-pointer`}>
 		<h1>{name}</h1>
 
@@ -32,9 +48,34 @@ export default function Project({name, description}) {
 		</div>
 	    </div>
 
-	    <p className={`${!showAbout ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'} ${inTransition && 'absolute'}`}>
+	    <p className={`${!showAbout ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
+		${offScreen && 'absolute'}`}>
 		{description}
 	    </p>
+
+	    <div className={`relative flex justify-center screenshots w-full h-fit self-center
+			    ${!showAbout ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
+			    ${offScreen ? 'absolute w-0 h-0' : ''}
+			    overflow-x-hidden`}>
+		{
+		    screenshots.map((screen, index) => {
+			return (
+			    <img 
+				key={screen}
+				className={`w-full sm:max-w-[600px] md:max-w-[800px] rounded cursor-pointer
+					    ${inFocus == index 
+					      ? 'show-image'
+					      : (index < inFocus ? 'hide-image-left' : 'hide-image-right')}
+					    ${offScreen ? 'absolute w-0 h-0' : ''}
+					   `}
+				style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
+				src={`${screen}`}
+				onClick={_ => setInFocus(index)}
+			    />
+			)
+		    })
+		}
+	    </div>
 	</div>
     )
 }
