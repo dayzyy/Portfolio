@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 
 export default function Project({name, description, screenshots}) {
@@ -6,8 +6,9 @@ export default function Project({name, description, screenshots}) {
     const [offScreen, setOffScreen] = useState(true)
     const [inFocus, setInFocus] = useState(0)
     const [focusToggler, setFocusToggler] = useState(null)
+    const changedManually = useRef(false)
 
-    const handle_click = _ => {
+    const handle_click_project = _ => {
 	setShowABout(prev => {
 	    if (prev) {
 		setTimeout(_ => {
@@ -17,7 +18,19 @@ export default function Project({name, description, screenshots}) {
 	    else setOffScreen(false)
 	    return !prev
 	})
+
 	setInFocus(0)
+    }
+
+    const handle_click_image = index => {
+	setInFocus(index)
+
+	setFocusToggler(prev => {
+	    console.log('cleared')
+	    if (prev) clearInterval(prev)
+	    return null
+	})
+	changedManually.current = true
     }
 
     useEffect(() => {
@@ -29,17 +42,19 @@ export default function Project({name, description, screenshots}) {
 	    return
 	}
 
+	if (changedManually.current) changedManually.current = false
+
 	const interval = setInterval( _ => {
 	    setInFocus(prev => (prev !== screenshots.length - 1 ? prev + 1 : 0))
 	}, 2000)
 	setFocusToggler(interval)
 
 	return _ => clearInterval(interval)
-    }, [showAbout])
+    }, [showAbout, changedManually.current])
 
     return (
 	<div className={`project-box ${showAbout ? 'open-box' : ''}`}>
-	    <div onClick={handle_click} className={`w-full flex justify-between items-center cursor-pointer`}>
+	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
 		<h1>{name}</h1>
 
 		<div id="about-p" className="flex gap-1 items-center">
@@ -70,7 +85,7 @@ export default function Project({name, description, screenshots}) {
 					   `}
 				style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
 				src={`${screen}`}
-				onClick={_ => setInFocus(index)}
+				onClick={_ => handle_click_image(index)}
 			    />
 			)
 		    })
