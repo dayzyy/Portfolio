@@ -1,24 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 
-export default function Project({name, description, screenshots}) {
-    const [showAbout, setShowABout] = useState(false)
+export default function Project({name, description, screenshots, is_shown, on_toggle}) {
     const [offScreen, setOffScreen] = useState(true)
     const [inFocus, setInFocus] = useState(0)
     const [focusToggler, setFocusToggler] = useState(null)
     const changedManually = useRef(false)
 
     const handle_click_project = _ => {
-	setShowABout(prev => {
-	    if (prev) {
-		setTimeout(_ => {
-		    setOffScreen(true)
-		}, 200)
-	    }
-	    else setOffScreen(false)
-	    return !prev
-	})
-
+	on_toggle()
 	setInFocus(0)
     }
 
@@ -26,15 +16,22 @@ export default function Project({name, description, screenshots}) {
 	setInFocus(index)
 
 	setFocusToggler(prev => {
-	    console.log('cleared')
 	    if (prev) clearInterval(prev)
 	    return null
 	})
 	changedManually.current = true
     }
 
+    useEffect(_ => {
+	if (is_shown) {
+	    setOffScreen(false)
+	} else {
+	    setTimeout(_ => setOffScreen(true), 200)
+	}
+    }, [is_shown])
+
     useEffect(() => {
-	if (!showAbout) {
+	if (!is_shown) {
 	    setFocusToggler(prev => {
 		if (prev) clearInterval(prev)
 		return null
@@ -50,27 +47,27 @@ export default function Project({name, description, screenshots}) {
 	setFocusToggler(interval)
 
 	return _ => clearInterval(interval)
-    }, [showAbout, changedManually.current])
+    }, [is_shown, changedManually.current])
 
     return (
-	<div className={`project-box ${showAbout ? 'open-box' : ''}`}>
+	<div className={`project-box ${is_shown ? 'open-box' : ''}`}>
 	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
 		<h1>{name}</h1>
 
 		<div id="about-p" className="flex gap-1 items-center">
 		    <p className="hidden md:block">about</p>
-		    <TbCaretDownFilled className={`${!showAbout ? '-rotate-90' : 'rotate-0'}`}/>
+		    <TbCaretDownFilled className={`${!is_shown ? '-rotate-90' : 'rotate-0'}`}/>
 		</div>
 	    </div>
 
-	    <p className={`${!showAbout ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
+	    <p className={`${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
 		${offScreen && 'absolute'}`}>
 		{description}
 	    </p>
 
 	    <div className={`relative flex justify-center screenshots w-full h-fit self-center
-			    ${!showAbout ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
-			    ${offScreen ? 'absolute w-0 h-0' : ''}
+			    ${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
+			    ${offScreen ? 'off-screen' : ''}
 			    overflow-x-hidden`}>
 		{
 		    screenshots.map((screen, index) => {
@@ -81,7 +78,7 @@ export default function Project({name, description, screenshots}) {
 					    ${inFocus == index 
 					      ? 'show-image'
 					      : (index < inFocus ? 'hide-image-left' : 'hide-image-right')}
-					    ${offScreen ? 'absolute w-0 h-0' : ''}
+					    ${offScreen ? 'off-screen' : ''}
 					   `}
 				style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
 				src={`${screen}`}

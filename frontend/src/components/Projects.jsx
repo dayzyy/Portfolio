@@ -1,7 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Project from "./Project.jsx";
 
 export default function Projects() {
+    const [inFocus, setInFocus] = useState(null)
+
+    const toggle_focus = name => {
+	setInFocus(prev => prev == name ? null : name)
+    }
+
     useEffect(_ => {
 	const entries = Array.from(document.getElementsByClassName('project-box'))
 
@@ -21,7 +27,7 @@ export default function Projects() {
 		    behavior: 'smooth',
 		    block: 'center',
 		})
-	    }, 200)
+	    }, 500)
 	}
 
 	entries.forEach(entry => {
@@ -90,7 +96,17 @@ export default function Projects() {
 
     return (<>
 	{
-	    projects.map(project => <Project key={project.name} name={project.name} description={project.description} screenshots={project.screenshots}/>)
+	    projects.map(project => {
+		return (
+		    <Project key={project.name}
+			     name={project.name}
+			     description={project.description}
+			     screenshots={project.screenshots}
+			     is_shown={inFocus == project.name}
+			     on_toggle={_ => toggle_focus(project.name)}
+		    />
+		)
+	    })
 	}
     </>)
 }

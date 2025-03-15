@@ -184,6 +184,14 @@
 	transform: translateX(0);
     }
 
+    .off-screen {
+	position: absolute;
+	height: 0;
+	width: 0;
+	margin: 0;
+	padding: 0;
+    }
+
      @keyframes slide-x { to {transform: translateX(0);} }
 
      @keyframes slide-y { to {transform: translateY(0);} }

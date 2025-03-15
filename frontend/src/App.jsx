@@ -14,7 +14,7 @@ export default function App() {
 	document.documentElement.setAttribute('data-theme', theme)
 	localStorage.setItem('theme', theme)
 
-	//disable scrolling for first 2800ms after page loads
+	//disable scrolling for first 2800ms after page loads, to wait for the start animations to finish
 	document.documentElement.style.overflow = 'hidden'
 	setTimeout(_ => {
 	    document.documentElement.style.overflow = 'auto'
