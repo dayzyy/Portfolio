@@ -10,8 +10,24 @@ export default function App() {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'original')
 
     useEffect(_ => {
+	//set theme
 	document.documentElement.setAttribute('data-theme', theme)
 	localStorage.setItem('theme', theme)
+
+	//disable scrolling for first 2800ms after page loads
+	document.documentElement.style.overflow = 'hidden'
+	setTimeout(_ => {
+	    document.documentElement.style.overflow = 'auto'
+	}, 2800)
+
+	const load = _ => {
+	    history.scrollRestoration = "manual"
+	    window.scrollTo(0, 0)
+	}
+
+	window.addEventListener('load', load)
+
+	return _ => window.removeEventListener('load', load)
     }, [theme])
   
     return (

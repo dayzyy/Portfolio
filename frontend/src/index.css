@@ -172,7 +172,7 @@
     .hide-image-left, .hide-image-right {
 	position: absolute;
 	scale: .5;
-	filter: blur(10px);
+	filter: blur(5px);
     }
     .hide-image-left {transform: translateX(-180%);}
     .hide-image-right {transform: translateX(180%);}
