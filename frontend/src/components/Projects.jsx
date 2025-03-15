@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import Project from "./Project.jsx";
+import ImageGallery from "./ImageGallery.jsx"
 
 export default function Projects() {
     const [inFocus, setInFocus] = useState(null)
+    const [showGallery, setShowGallery] = useState(false)
 
     const toggle_focus = name => {
 	setInFocus(prev => prev == name ? null : name)
+    }
+
+    const toggle_gallery = _ => {
+	setShowGallery(prev => {
+	    if (!prev) document.documentElement.style.overflow = 'hidden'
+	    else document.documentElement.style.overflow = 'auto'
+	    return !prev
+	})
     }
 
     useEffect(_ => {
@@ -97,15 +107,23 @@ export default function Projects() {
     return (<>
 	{
 	    projects.map(project => {
-		return (
-		    <Project key={project.name}
-			     name={project.name}
+		return (<div className="w-full flex flex-col items-center gap-12"
+			key={project.name}
+			>
+		    <ImageGallery opened={showGallery}
+				  images={project.screenshots}
+    				  toggle_off={toggle_gallery}
+		    />
+
+		    <Project name={project.name}
 			     description={project.description}
 			     screenshots={project.screenshots}
 			     is_shown={inFocus == project.name}
 			     on_toggle={_ => toggle_focus(project.name)}
+			     on_image_click={toggle_gallery}
+			     gallery_shown={showGallery}
 		    />
-		)
+		</div>)
 	    })
 	}
     </>)

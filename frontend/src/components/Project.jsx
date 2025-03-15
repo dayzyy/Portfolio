@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 
-export default function Project({name, description, screenshots, is_shown, on_toggle}) {
+export default function Project({name, description, screenshots, is_shown, on_toggle, on_image_click, gallery_shown}) {
     const [offScreen, setOffScreen] = useState(true)
     const [inFocus, setInFocus] = useState(0)
     const [focusToggler, setFocusToggler] = useState(null)
@@ -13,13 +13,23 @@ export default function Project({name, description, screenshots, is_shown, on_to
     }
 
     const handle_click_image = index => {
-	setInFocus(index)
+	if(inFocus != index) {
+	    setInFocus(index)
 
-	setFocusToggler(prev => {
-	    if (prev) clearInterval(prev)
-	    return null
-	})
-	changedManually.current = true
+	    setFocusToggler(prev => {
+		if (prev) clearInterval(prev)
+		return null
+	    })
+	    changedManually.current = true
+	}
+	else {
+	    on_image_click()
+
+	    setFocusToggler(prev => {
+		if (prev) clearInterval(prev)
+		return null
+	    })
+	}
     }
 
     useEffect(_ => {
@@ -31,6 +41,8 @@ export default function Project({name, description, screenshots, is_shown, on_to
     }, [is_shown])
 
     useEffect(() => {
+	if(gallery_shown) return
+
 	if (!is_shown) {
 	    setFocusToggler(prev => {
 		if (prev) clearInterval(prev)
@@ -47,7 +59,7 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	setFocusToggler(interval)
 
 	return _ => clearInterval(interval)
-    }, [is_shown, changedManually.current])
+    }, [is_shown, changedManually.current, gallery_shown])
 
     return (
 	<div className={`project-box ${is_shown ? 'open-box' : ''}`}>
@@ -61,7 +73,7 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	    </div>
 
 	    <p className={`${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
-		${offScreen && 'absolute'}`}>
+		${offScreen && 'off-screen'}`}>
 		{description}
 	    </p>
 
@@ -76,8 +88,8 @@ export default function Project({name, description, screenshots, is_shown, on_to
 				key={screen}
 				className={`w-full sm:max-w-[600px] md:max-w-[800px] rounded cursor-pointer
 					    ${inFocus == index 
-					      ? 'show-image'
-					      : (index < inFocus ? 'hide-image-left' : 'hide-image-right')}
+					      ? 'show-screen'
+					      : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}
 					    ${offScreen ? 'off-screen' : ''}
 					   `}
 				style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
