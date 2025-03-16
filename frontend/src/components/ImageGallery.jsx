@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
-export default function ImageGallery({images, opened, toggle_off}) {
-    const [inFocus, setInFocus] = useState(0)
+export default function ImageGallery({opened, images, focused_image, toggle_off}) {
+    const [inFocus, setInFocus] = useState(focused_image)
+
+    useEffect(_ => {
+	if (opened) setInFocus(focused_image)
+    }, [opened])
 
     const handle_click = (event, to)=> {
 	event.stopPropagation()
@@ -14,11 +18,14 @@ export default function ImageGallery({images, opened, toggle_off}) {
 	<div className={`gallery
 			${opened ? 'show-gallery' : 'hide-gallery'}
 			`}
-	     onClick={_ => (toggle_off(), setInFocus(0))}
+	     onClick={toggle_off}
 	>
 
-	<FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-0'}`}
-		     onClick={inFocus == 0 ? _ => _ : e => handle_click(e, -1)}
+	<FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
+		     onClick={inFocus == 0
+			 ? e => e.stopPropagation()
+			 : e => handle_click(e, -1)
+		     }
 	/>
 
 	{
@@ -37,8 +44,11 @@ export default function ImageGallery({images, opened, toggle_off}) {
 	    })
 	}
 
-	<FaAngleRight className={`arrow ${inFocus == (images.length - 1) && 'opacity-0'}`}
-		      onClick={inFocus == (images.length - 1) ? _ => _ : e => handle_click(e, 1)}
+	<FaAngleRight className={`arrow ${inFocus == (images.length - 1) && 'opacity-[.1]'}`}
+		      onClick={inFocus == (images.length - 1)
+			  ? e => e.stopPropagation()
+			  : e => handle_click(e, 1)
+		      }
 	/>
 	</div>
     )

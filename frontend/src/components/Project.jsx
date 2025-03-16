@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
+import ImageGallery from "./ImageGallery.jsx"
 
-export default function Project({name, description, screenshots, is_shown, on_toggle, on_image_click, gallery_shown}) {
+export default function Project({name, description, screenshots, is_shown, on_toggle}) {
     const [offScreen, setOffScreen] = useState(true)
     const [inFocus, setInFocus] = useState(0)
     const [focusToggler, setFocusToggler] = useState(null)
     const changedManually = useRef(false)
+    const [showGallery, setShowGallery] = useState(false)
 
     const handle_click_project = _ => {
 	on_toggle()
@@ -23,7 +25,7 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	    changedManually.current = true
 	}
 	else {
-	    on_image_click()
+	    setShowGallery(true)
 
 	    setFocusToggler(prev => {
 		if (prev) clearInterval(prev)
@@ -41,7 +43,7 @@ export default function Project({name, description, screenshots, is_shown, on_to
     }, [is_shown])
 
     useEffect(() => {
-	if(gallery_shown) return
+	if(showGallery) return
 
 	if (!is_shown) {
 	    setFocusToggler(prev => {
@@ -59,9 +61,15 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	setFocusToggler(interval)
 
 	return _ => clearInterval(interval)
-    }, [is_shown, changedManually.current, gallery_shown])
+    }, [is_shown, changedManually.current, showGallery])
 
-    return (
+    return (<>
+	<ImageGallery opened={showGallery}
+		      images={screenshots}
+		      focused_image={inFocus}
+		      toggle_off={_ => setShowGallery(false)}
+	/>
+
 	<div className={`project-box ${is_shown ? 'open-box' : ''}`}>
 	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
 		<h1>{name}</h1>
@@ -101,5 +109,5 @@ export default function Project({name, description, screenshots, is_shown, on_to
 		}
 	    </div>
 	</div>
-    )
+    </>)
 }
