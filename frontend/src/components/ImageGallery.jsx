@@ -2,54 +2,69 @@ import { useEffect, useState } from "react"
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
-export default function ImageGallery({opened, images, focused_image, toggle_off}) {
+export default function ImageGallery({images, focused_image, toggle_off, vp_mobile}) {
     const [inFocus, setInFocus] = useState(focused_image)
 
     useEffect(_ => {
-	if (opened) setInFocus(focused_image)
-    }, [opened])
+	document.documentElement.style.overflow = 'hidden'
+	return _ => document.documentElement.style.overflow = 'auto'
+    })
 
     const handle_click = (event, to)=> {
 	event.stopPropagation()
 	setInFocus(prev => prev + to)
     }
 
-    return (
-	<div className={`gallery
-			${opened ? 'show-gallery' : 'hide-gallery'}
-			`}
-	     onClick={toggle_off}
-	>
+    if (!vp_mobile) {
+	return (
+	    <div className={`gallery`} onClick={toggle_off}>
 
-	<FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
-		     onClick={inFocus == 0
-			 ? e => e.stopPropagation()
-			 : e => handle_click(e, -1)
-		     }
-	/>
+	    <FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
+			 onClick={inFocus == 0
+			     ? e => e.stopPropagation()
+			     : e => handle_click(e, -1)
+			 }
+	    />
 
-	{
-	    images.map((image, index) => {
-		return (
-		    <img 
-			key={image}
-			className={`max-w-[90%] max-h-[90%] rounded
-				    ${inFocus == index 
-				      ? 'show-image'
-				      : (index < inFocus ? 'hide-image-left' : 'hide-image-right')}
-				   `}
-			src={`${image}`}
-		    />
-		)
-	    })
-	}
+	    {
+		images.names.map((image, index) => {
+		    return (
+			<img 
+			    key={image}
+			    className={`max-w-[90%] max-h-[90%] rounded
+					${inFocus == index 
+					  ? 'show-image'
+					  : (index < inFocus ? 'hide-image-left' : 'hide-image-right')}
+				       `}
+			    src={`screenshots/${images.dir}/desktop/${image}`}
+			/>
+		    )
+		})
+	    }
 
-	<FaAngleRight className={`arrow ${inFocus == (images.length - 1) && 'opacity-[.1]'}`}
-		      onClick={inFocus == (images.length - 1)
-			  ? e => e.stopPropagation()
-			  : e => handle_click(e, 1)
-		      }
-	/>
-	</div>
-    )
+	    <FaAngleRight className={`arrow ${inFocus == (images.names.length - 1) && 'opacity-[.1]'}`}
+			  onClick={inFocus == (images.names.length - 1)
+			      ? e => e.stopPropagation()
+			      : e => handle_click(e, 1)
+			  }
+	    />
+	    </div>
+	)
+    } else {
+	return (
+	    <div className={`gallery flex flex-col gap-12 overflow-y-scroll`} onClick={toggle_off}>
+	    {
+		images.names.map((image) => {
+		    return (
+			<img 
+			    key={image}
+			    className={`max-w-[90%] max-h-[800px] rounded`}
+			    src={`screenshots/${images.dir}/mobile/${image}`}
+			/>
+		    )
+		})
+	    }
+	    </div>
+	)
+    }
 }

@@ -8,6 +8,7 @@ export default function Project({name, description, screenshots, is_shown, on_to
     const [focusToggler, setFocusToggler] = useState(null)
     const changedManually = useRef(false)
     const [showGallery, setShowGallery] = useState(false)
+    const [vpMobile, setVpMobile] = useState(window.innerWidth <= 600)
 
     const handle_click_project = _ => {
 	on_toggle()
@@ -56,19 +57,37 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	if (changedManually.current) changedManually.current = false
 
 	const interval = setInterval( _ => {
-	    setInFocus(prev => (prev !== screenshots.length - 1 ? prev + 1 : 0))
+	    setInFocus(prev => (prev !== screenshots.names.length - 1 ? prev + 1 : 0))
 	}, 2000)
 	setFocusToggler(interval)
 
 	return _ => clearInterval(interval)
     }, [is_shown, changedManually.current, showGallery])
 
+    useEffect(_ => {
+	const handle_resize = _ => {
+	    console.log('resizeing')
+	    setVpMobile(window.innerWidth < 600)
+	}
+
+	if (is_shown) {
+	    window.addEventListener('resize', handle_resize)
+	} else {
+	    window.removeEventListener('resize', handle_resize)
+	}
+
+	return _ => window.removeEventListener('resize', handle_resize)
+    }, [is_shown])
+
     return (<>
-	<ImageGallery opened={showGallery}
-		      images={screenshots}
-		      focused_image={inFocus}
-		      toggle_off={_ => setShowGallery(false)}
-	/>
+	{
+	    showGallery &&
+	    <ImageGallery images={screenshots}
+			  focused_image={inFocus}
+			  toggle_off={_ => setShowGallery(false)}
+			  vp_mobile={vpMobile}
+	    />
+	}
 
 	<div className={`project-box ${is_shown ? 'open-box' : ''}`}>
 	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
@@ -90,18 +109,18 @@ export default function Project({name, description, screenshots, is_shown, on_to
 			    ${offScreen ? 'off-screen' : ''}
 			    overflow-x-hidden`}>
 		{
-		    screenshots.map((screen, index) => {
+		    screenshots.names.map((screen, index) => {
 			return (
 			    <img 
 				key={screen}
-				className={`w-full sm:max-w-[600px] md:max-w-[800px] rounded cursor-pointer
+				className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer
 					    ${inFocus == index 
 					      ? 'show-screen'
 					      : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}
 					    ${offScreen ? 'off-screen' : ''}
 					   `}
 				style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
-				src={`${screen}`}
+				src={`screenshots/${screenshots.dir}/${vpMobile ? 'mobile' : 'desktop'}/${screen}`}
 				onClick={_ => handle_click_image(index)}
 			    />
 			)
