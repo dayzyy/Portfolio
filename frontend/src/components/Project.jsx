@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 import ImageGallery from "./ImageGallery.jsx"
 
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
+
 export default function Project({name, description, screenshots, is_shown, on_toggle}) {
     const [offScreen, setOffScreen] = useState(true)
     const [inFocus, setInFocus] = useState(0)
@@ -35,6 +38,12 @@ export default function Project({name, description, screenshots, is_shown, on_to
 	}
     }
 
+    const handle_click_arrow = (event, to) => {
+	event.stopPropagation()
+	setInFocus(prev => prev + to)
+	changedManually.current = true
+    }
+
     useEffect(_ => {
 	if (is_shown) {
 	    setOffScreen(false)
@@ -66,7 +75,6 @@ export default function Project({name, description, screenshots, is_shown, on_to
 
     useEffect(_ => {
 	const handle_resize = _ => {
-	    console.log('resizeing')
 	    setVpMobile(window.innerWidth < 600)
 	}
 
@@ -104,8 +112,8 @@ export default function Project({name, description, screenshots, is_shown, on_to
 		{description}
 	    </p>
 
-	    <div className={`relative flex justify-center screenshots w-full h-fit self-center
-			    ${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
+	    <div className={`screenshots relative flex flex-col gap-4 items-center w-full h-fit self-center
+			    ${is_shown && 'slide-in'}
 			    ${offScreen ? 'off-screen' : ''}
 			    overflow-x-hidden`}>
 		{
@@ -126,6 +134,22 @@ export default function Project({name, description, screenshots, is_shown, on_to
 			)
 		    })
 		}
+
+		<div className="flex w-5/6 justify-around">
+		    <FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
+				 onClick={inFocus == 0
+				     ? e => e.stopPropagation()
+				     : e => handle_click_arrow(e, -1)
+				 }
+		    />
+
+		    <FaAngleRight className={`arrow ${inFocus == (screenshots.names.length - 1) && 'opacity-[.1]'}`}
+				  onClick={inFocus == (screenshots.names.length - 1)
+				      ? e => e.stopPropagation()
+				      : e => handle_click_arrow(e, 1)
+				  }
+		    />
+		</div>
 	    </div>
 	</div>
     </>)

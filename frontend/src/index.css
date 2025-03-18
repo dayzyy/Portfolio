@@ -173,11 +173,13 @@
     }
 
     .screenshots {
-	transition: all .4s ease;
+	transform: translateX(-100vw);
+	transition: transform .4s ease;
     }
 
     .screenshots img {
-	transition: all .4s ease;
+	transition: transform .4s ease,
+		    scale .4s ease;
     }
 
     .desktop-screenshot {
@@ -225,6 +227,10 @@
     .open-box {
 	border-bottom: transparent;
     }
+
+    .slide-in {
+	transform: translateX(0);
+    }
     
     .hide-screen-left, .hide-screen-right {
 	position: absolute;
@@ -235,23 +241,18 @@
     .hide-screen-right {transform: translateX(180%);}
     
     .show-screen {
-	position: block;
-	scale: 1;
-	filter: blur(0px);
-	transform: translateX(0);
+	position: relative;
+	z-index: 9000 !important;
     }
 
     .off-screen {
 	position: absolute;
-	height: 0;
-	width: 0;
 	margin: 0;
 	padding: 0;
     }
 
     .show-image {
 	position: block;
-	transform: translateX(0);
     }
 
     .hide-image-left {
@@ -264,7 +265,7 @@
 	transform: translateX(200%);
     }
 }
-
+    
 @media (min-width: 640px) {
     .desktop-screenshot {
 	max-width: 600px;

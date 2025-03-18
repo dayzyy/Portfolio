@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
 
 export default function ImageGallery({images, focused_image, toggle_off, vp_mobile}) {
     const [inFocus, setInFocus] = useState(focused_image)
@@ -52,7 +53,11 @@ export default function ImageGallery({images, focused_image, toggle_off, vp_mobi
 	)
     } else {
 	return (
-	    <div className={`gallery flex flex-col gap-12 overflow-y-scroll`} onClick={toggle_off}>
+	    <div className={`gallery flex flex-col justify-start gap-12 py-4 overflow-y-scroll`}>
+		<IoIosClose 
+		    className="text-gray-500 text-[5rem] self-start opacity-70 fixed cursor-pointer"
+		    onClick={toggle_off}
+		/>
 	    {
 		images.names.map((image) => {
 		    return (

@@ -11,7 +11,6 @@ export default function Projects() {
     useEffect(_ => {
 	const entries = Array.from(document.getElementsByClassName('project-box'))
 	entries.push(document.getElementById('personal-projects'))
-	console.log(entries)
 
 	const observer = new IntersectionObserver(entries => {
 	    entries.forEach(entry => {
@@ -21,28 +20,14 @@ export default function Projects() {
 	    })
 	})
 
-	const handle_click = event => {
-	    const element = event.currentTarget.closest('.project-box')
-	    
-	    if (!element) return
-
-	    setTimeout(_ => {
-		element.scrollIntoView({
-		    behavior: 'smooth',
-		    block: 'center',
-		})
-	    }, 500)
-	}
 
 	entries.forEach(entry => {
 	    observer.observe(entry)
-	    entry.onclick = handle_click
 	})
 
 	return _ => {
 	    entries.forEach(entry => {
 		observer.unobserve(entry)
-		entry.onclick = null
 	    })
 	}
     }, [])
@@ -90,17 +75,14 @@ export default function Projects() {
 	 name: 'Ecommerce',
 	 description: "A simple yet functional e-commerce platform where admins can add, manage, and update products, while users can browse, add items to their cart, and place orders. Built with Django and React, it features user authentication, product management, and a seamless shopping experience.",
 	 screenshots: {
-	     dir: 'socialMediaApp',
+	     dir: 'ecommerceApp',
 	     names: [
-		 "signup1.png",
-		 "signup2.png",
 		 "feed.png",
-		 "myprofile.png",
-		 "friendprofile.png",
-		 "friends.png",
-		 "notifications.png",
-		 "directs.png",
-		 "chat.png",
+		 "item.png",
+		 "cart1.png",
+		 "cart2.png",
+		 "settings.png",
+		 "categories.png"
 	     ]
 	 }
 	},
