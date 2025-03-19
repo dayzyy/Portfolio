@@ -8,6 +8,7 @@ import Projects from "./components/Projects.jsx"
 
 export default function App() {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'original')
+    console.log(theme)
 
     useEffect(_ => {
 	//set theme

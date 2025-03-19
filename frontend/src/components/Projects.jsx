@@ -49,26 +49,24 @@ export default function Projects() {
 		 "directs.png",
 		 "chat.png",
 	     ]
-	 }
+	 },
+	 link: 'https://github.com/dayzyy/API-SocialMediaApp'
 	},
 
 	{
 	 name: 'Weather Forecast',
 	 description: "A sleek and minimal weather forecast application built with React and Tailwind CSS. It fetches real-time weather data from an external API, providing details such as temperature, humidity, wind speed, and sunrise/sunset times. Users can view the current day's weather and, with a click, access a week-long forecast.",
 	 screenshots: {
-	     dir: 'socialMediaApp',
+	     dir: 'weatherApp',
 	     names: [
-		 "signup1.png",
-		 "signup2.png",
-		 "feed.png",
-		 "myprofile.png",
-		 "friendprofile.png",
-		 "friends.png",
-		 "notifications.png",
-		 "directs.png",
-		 "chat.png",
+		 "home1.png",
+		 "home2.png",
+		 "info1.png",
+		 "info2.png",
+		 "info3.png",
 	     ]
-	 }
+	 },
+	 link: 'https://github.com/dayzyy/API-WeatherForecastApp'
 	},
 
 	{
@@ -84,7 +82,8 @@ export default function Projects() {
 		 "settings.png",
 		 "categories.png"
 	     ]
-	 }
+	 },
+	 link: 'https://github.com/dayzyy/API-EcommerceApp'
 	},
 
     ]
@@ -98,6 +97,7 @@ export default function Projects() {
 			     name={project.name}
 			     description={project.description}
 			     screenshots={project.screenshots}
+			     link={project.link}
 			     is_shown={inFocus == project.name}
 			     on_toggle={_ => toggle_focus(project.name)}
 		    />

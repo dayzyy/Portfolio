@@ -43,6 +43,10 @@
 	 font-weight: bold;
      }
 
+     a {
+	 color: var(--color-text-link);
+     }
+
      svg:is(.socials){
 	 color: var(--color-text-logo);
 	 font-size: 1.4rem;
@@ -73,6 +77,7 @@
 	--color-text-secondary: #D1D5DB;
 	--color-text-paragraph: #DBEAFE;
 	--color-text-icon: #0F172A;
+	--color-text-link: #38BDF8;
 
 	--color-icon-lang: #1F2937;
     }
@@ -158,15 +163,14 @@
 	transition: border-color .4s ease;
     }
 
-    .project-box > p {
-	max-width: 80%;
+    .about-project {
 	color: var(--color-text-paragraph);
 	transition: all .4s ease;
     }
 
     #personal-projects {transform: translateX(-100%);}
 
-    #about-p > svg {
+    .about-icon > svg {
 	color: var(--color-text-secondary);
 	font-size: 1.3rem;
 	transition: .2s ease;
