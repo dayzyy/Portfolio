@@ -20,7 +20,7 @@ export default function ImageGallery({images, focused_image, toggle_off, vp_mobi
 	return (
 	    <div className={`gallery`} onClick={toggle_off}>
 
-	    <FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
+	    <FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'} text-[#fff]`}
 			 onClick={inFocus == 0
 			     ? e => e.stopPropagation()
 			     : e => handle_click(e, -1)
@@ -43,7 +43,7 @@ export default function ImageGallery({images, focused_image, toggle_off, vp_mobi
 		})
 	    }
 
-	    <FaAngleRight className={`arrow ${inFocus == (images.names.length - 1) && 'opacity-[.1]'}`}
+	    <FaAngleRight className={`arrow ${inFocus == (images.names.length - 1) && 'opacity-[.1]'} text-[#fff]`}
 			  onClick={inFocus == (images.names.length - 1)
 			      ? e => e.stopPropagation()
 			      : e => handle_click(e, 1)

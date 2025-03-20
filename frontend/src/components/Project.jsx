@@ -109,7 +109,7 @@ export default function Project({name, description, screenshots, link, is_shown,
 
 	    <div className={`${offScreen && 'off-screen'} flex flex-col gap-16`}>
 		<div className={`about-project ${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
-		    ${offScreen && 'off-screen'} sm:max-w-5/6 flex flex-col gap-4`}>
+		    ${offScreen && 'off-screen'} flex flex-col gap-4`}>
 		    <p>{description}</p>
 		    <p><a href={link}>{link}</a></p>
 		</div>

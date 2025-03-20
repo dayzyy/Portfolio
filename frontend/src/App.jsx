@@ -1,20 +1,14 @@
-import {useEffect, useState} from "react"
+import { useEffect } from "react"
 import Logo from "./components/Logo.jsx"
 import CV from "./components/CV.jsx"
 import Information from "./components/Information.jsx"
 import Skills from "./components/Skills.jsx"
 import SeeWork from "./components/SeeWork.jsx"	
 import Projects from "./components/Projects.jsx"
+import Theme from "./components/Theme.jsx"
 
 export default function App() {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'original')
-    console.log(theme)
-
     useEffect(_ => {
-	//set theme
-	document.documentElement.setAttribute('data-theme', theme)
-	localStorage.setItem('theme', theme)
-
 	//disable scrolling for first 2800ms after page loads, to wait for the start animations to finish
 	document.documentElement.style.overflow = 'hidden'
 	setTimeout(_ => {
@@ -29,7 +23,7 @@ export default function App() {
 	window.addEventListener('load', load)
 
 	return _ => window.removeEventListener('load', load)
-    }, [theme])
+    }, [])
   
     return (
 	<main className="bg-[var(--color-bg)] overflow-hidden">
@@ -43,7 +37,7 @@ export default function App() {
 		    <div className="flex flex-col gap-4 w-full md:w-[600px]">
 			<div id="intro" className="flex items-center justify-between">
 			    <div className="flex flex-col gap-0">
-				<p className="trim text-[#a5f3fc]">hi, i am</p>
+				<p className="trim text-[var(--color-text-greet)]">hi, i am</p>
 				<h1 className="trim">Luka Mania</h1>
 				<h2 className="trim text-[var(--color-text-secondary)]">Web Developer</h2>
 			    </div>
@@ -62,12 +56,13 @@ export default function App() {
 		    </div>
 		</section>
 
-		<section className="w-full flex justify-end">
+		<section className="w-full flex items-center justify-between pl-8">
+		    <Theme/>
 		    <SeeWork/>
 		</section>
 	    </div>
 
-	    <div className="w-screen pb-[8rem] p-4 flex">
+	    <div className="w-screen py-[8rem] p-4 flex">
 		<section className="w-full flex flex-col items-center gap-12">
 		    <Projects/>
 		</section>

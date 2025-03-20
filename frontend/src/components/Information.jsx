@@ -8,7 +8,7 @@ export default function Information() {
     return (
 	<div className="flex flex-col items-end gap-1">
 	    <div id="location" className="flex gap-1">
-	        <SlLocationPin className={`text-[var(--color-text-logo)] text-[1.4rem]`}/>
+	        <SlLocationPin className={`text-[var(--color-icon-social)] text-[1.4rem]`}/>
 		<p className="font-bold">Georgia/Tbilisi</p>
 	    </div>
 	    
