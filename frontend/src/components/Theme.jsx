@@ -2,9 +2,11 @@ import { useState, useEffect } from "react"
 
 export default function Theme() {
     const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || {name: "original", color: "#64748B" })
+    const [isActive, setIsActive] = useState(false)
+
     const themes = [
-	{name: "original", color: "#64748B" },
 	{name: "dark", color: "#1E293B" },
+	{name: "original", color: "#64748B" },
 	{name: "light", color: "#E2E8F0" },
 	{name: "retro", color: "#C2410c" },
 	{name: "solarized", color: "#268BD2" },
@@ -26,6 +28,12 @@ export default function Theme() {
 	localStorage.setItem('theme', JSON.stringify(theme))
     }, [theme])
 
+    useEffect(_ => {
+	setTimeout(_ => {
+	    setIsActive(true)
+	},  3000)
+    }, [])
+
     return (
 	<div className="theme-box flex gap-8">
 	    <div
@@ -36,15 +44,18 @@ export default function Theme() {
 		    themes.map(t => {
 			return (
 			    <div key={t.name}
-				 className={`theme-circle ${theme.name == t.name ? 'show-theme' : 'hide-theme'}`}
-				 style={{backgroundColor: t.color, "--glow-color": t.color}}>
+				 className={`theme-circle 
+					    ${theme.name == t.name ? 'show-theme' : 'hide-theme'}
+					    ${isActive ? 'active' : ''}
+					   `}
+				 style={{backgroundColor: t.color}}>
 			    </div>
 			)
 		    })
 		}
 	    </div>
 
-	    <p onClick={toggle_theme} className="cursor-pointer">"{theme.name}"</p>
+	    <p onClick={toggle_theme} className="cursor-pointer select-none">"{theme.name}"</p>
 	</div>
     )
 }

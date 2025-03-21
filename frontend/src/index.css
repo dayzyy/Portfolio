@@ -335,18 +335,43 @@
 	position: absolute;
 	border: 1px solid var(--color-text-secondary);
 	border-radius: 50%;
+	box-shadow: none;
 	width: .8rem;
 	height: .8rem;
+	transition: transform .2s ease;
     }
 
-    .theme-circle:nth-of-type(1) {transform: translateY(-170%);}
-    .theme-circle:nth-of-type(2) {transform: translate(140%, -140%);}
-    .theme-circle:nth-of-type(3) {transform: translateX(170%);}
-    .theme-circle:nth-of-type(4) {transform: translate(140%, 140%);}
-    .theme-circle:nth-of-type(5) {transform: translateY(170%);}
-    .theme-circle:nth-of-type(6) {transform: translate(-140%, 140%);}
-    .theme-circle:nth-of-type(7) {transform: translateX(-170%);}
-    .theme-circle:nth-of-type(8) {transform: translate(-140%, -140%);}
+    .theme-circle.active:nth-of-type(1) {
+	transform: translateY(-170%);
+    }
+    .theme-circle.active:nth-of-type(2) {
+	transform: translate(140%, -140%);
+	transition-delay: .1s;
+    }
+    .theme-circle.active:nth-of-type(3) {
+	transform: translateX(170%);
+	transition-delay: .2s;
+    }
+    .theme-circle.active:nth-of-type(4) {
+	transform: translate(140%, 140%);
+	transition-delay: .3s;
+    }
+    .theme-circle.active:nth-of-type(5) {
+	transform: translateY(170%);
+	transition-delay: .4s;
+    }
+    .theme-circle.active:nth-of-type(6) {
+	transform: translate(-140%, 140%);
+	transition-delay: .5s;
+    }
+    .theme-circle.active:nth-of-type(7) {
+	transform: translateX(-170%);
+	transition-delay: .6s;
+    }
+    .theme-circle.active:nth-of-type(8) {
+	transform: translate(-140%, -140%);
+	transition-delay: .7s;
+    }
 }
 
 @layer utilities {
@@ -404,7 +429,7 @@
     }
 
     .show-theme {
-	animation: glow 1.5s infinite alternate;
+	animation: glow .7s infinite .1s;
     }
 
     .hide-theme {
@@ -413,9 +438,9 @@
     }
 
     @keyframes glow {
-	0% { box-shadow: 0 0 20px red !important; }
-	50% { box-shadow: 0 0 40px red !important; }
-	100% { box-shadow: 0 0 10px red !important; }
+	0% { box-shadow: 0 0 10px 5px var(--color-icon-lang); }
+	50% { box-shadow: 0 0 20px 10px var(--color-icon-lang); }
+	100% { box-shadow: 0 0 10px 5px var(--color-icon-lang); }
     }
 
      @keyframes slide-x { to {transform: translateX(0);} }

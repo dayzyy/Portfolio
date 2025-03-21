@@ -29,7 +29,7 @@ export default function Logo() {
 	<div id="logo" className="flex gap-[.1rem] items-end">
 	    <h1>{'<'}</h1>
 	    <h1>{text.join("")}</h1>
-	    {!hideCursor && <div className="h-[26px] w-[13px] bg-[#00FFFF] mb-1"></div>}
+	    {!hideCursor && <div className="h-[26px] w-[13px] bg-[var(--color-text-primary)] mb-1"></div>}
 	    <h1>{'/'}</h1>
 	    <h1>{'>'}</h1>
 	</div>
