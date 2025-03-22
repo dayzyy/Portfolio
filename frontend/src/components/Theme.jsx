@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 
 export default function Theme() {
+    const [mounted, setMounted] = useState(true)
     const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || {name: "original", color: "#64748B" })
+    const [themeName, setThemeName] = useState(JSON.parse(localStorage.getItem('theme')).name || "original")
+    const [toggled, setToggled] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
     const themes = [
@@ -20,7 +23,16 @@ export default function Theme() {
 		const last_index = themes.findIndex(t => t.name == prev.name)
 		return themes[last_index != themes.length - 1 ? last_index + 1 : 0]
 	    })
+	    setToggled(true)
     }
+
+    useEffect(_ => {
+	const timeout = setTimeout(_ => {
+	    setMounted(false)
+	}, 4000)
+
+	return _ => clearTimeout(timeout)
+    }, [])
 
     useEffect(_ => {
 	//set theme
@@ -33,6 +45,17 @@ export default function Theme() {
 	    setIsActive(true)
 	},  3000)
     }, [])
+
+    useEffect(_ => {
+	if (!toggled) return
+
+	const timeout = setTimeout(_ => {
+	    setThemeName(theme.name)
+	    setToggled(false)
+	}, 500)
+
+	return _ => clearTimeout(timeout)
+    }, [toggled])
 
     return (
 	<div className="theme-box flex gap-8">
@@ -55,7 +78,12 @@ export default function Theme() {
 		}
 	    </div>
 
-	    <p onClick={toggle_theme} className="cursor-pointer select-none">"{theme.name}"</p>
+	    <p onClick={toggle_theme}
+	       className={`cursor-pointer select-none 
+			  ${mounted ? '' : toggled ? 'opacity-0' : 'opacity-100'}
+			  ${mounted ? 'theme-name-animate' : ''}
+			 `}>
+	       "{themeName}"</p>
 	</div>
     )
 }
