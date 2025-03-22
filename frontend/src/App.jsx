@@ -7,23 +7,10 @@ import SeeWork from "./components/SeeWork.jsx"
 import Projects from "./components/Projects.jsx"
 import Theme from "./components/Theme.jsx"
 import Language from "./components/Language.jsx"
+import ToggleScroll from "./components/ToggleScroll.jsx"
 
 export default function App() {
     useEffect(_ => {
-	//disable scrolling for first 2800ms after page loads, to wait for the start animations to finish
-	document.querySelector('main').style.overflowY = 'hidden'
-
-	setTimeout(_ => {
-	    document.querySelector('main').style.overflowY = 'auto'
-	}, 2800)
-
-	const load = _ => {
-	    history.scrollRestoration = "manual"
-	    window.scrollTo(0, 0)
-	}
-
-	window.addEventListener('load', load)
-
 	const observer = new IntersectionObserver(entries => {
 	    entries.forEach(entry => {
 		if (entry.isIntersecting) {
@@ -35,10 +22,7 @@ export default function App() {
 	const elements_to_animate = document.querySelectorAll('.slide-in-view')
 	elements_to_animate.forEach(entry => observer.observe(entry))
 
-	return _ => {
-	    window.removeEventListener('load', load)
-	    elements_to_animate.forEach(entry => observer.unobserve(entry))
-	}
+	return _ => elements_to_animate.forEach(entry => observer.unobserve(entry))
     }, [])
   
     return (
@@ -78,19 +62,23 @@ export default function App() {
 		</section>
 	    </div>
 
-	    <div className="section min-h-screen w-screen bg-[var(--color-bg-card)] p-4 grid place-items-center">
-		<section className="w-full flex flex-col items-center gap-12">
-		    <Projects/>
+	    <div className="section min-h-screen w-screen p-4 bg-[var(--color-bg-card)] grid place-items-center">
+		<section className="w-full h-full flex flex-col justify-around">
+		    <ToggleScroll/>
+
+		    <div className="flex-grow w-full flex flex-col justify-center gap-12">
+			<h1 className="slide-in-view"> I am bilingual. I fluently possess...</h1>
+			
+			<Language language='Georgian' description='Native'/>
+			<Language language='English' description='Have been persistenly studying it since childhood'/>
+			<Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
+		    </div>
 		</section>
 	    </div> 
 
-	    <div className="section min-h-screen w-screen p-4 bg-[var(--color-bg-card)] grid place-items-center">
-		<section className="w-full flex flex-col justify-start gap-12">
-		    <h1 className="slide-in-view"> I am bilingual. I fluently possess...</h1>
-		    
-		    <Language language='Georgian' description='Native'/>
-		    <Language language='English' description='Have been persistenly studying it since childhood'/>
-		    <Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
+	    <div className="section min-h-screen w-screen bg-[var(--color-bg-card)] p-4 grid place-items-center">
+		<section className="w-full flex flex-col items-center gap-12">
+		    <Projects/>
 		</section>
 	    </div> 
 	</main>
