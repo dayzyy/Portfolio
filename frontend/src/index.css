@@ -6,6 +6,7 @@
 @layer base {
     :root {
 	--size-text-heading: 1.6rem;
+	--size-text-subheading: 1.4rem;
 	--size-text-medium: 1.1rem;
 	--size-text-paragraph: 1rem;
 
@@ -40,7 +41,14 @@
      }
 
      h2 {
-	 color: var(--color-text-primary);
+	 color: var(--color-text-secondary);
+	 font-family: var(--font-family-heading);
+	 font-size: var(--size-text-subheading);
+	 font-weight: bold;
+     }
+
+     h3 {
+	 color: var(--color-text-paragraph);
 	 font-family: var(--font-family-text);
 	 font-size: var(--size-text-medium);
 	 font-weight: bold;
@@ -172,22 +180,6 @@
 
 	    --color-icon-social: #81E6D9; 
 	    --color-icon-lang: #80ED99;
-    }
-
-    [data-theme="grape"] {
-	    --color-bg: #3B0764;
-	    --color-bg-card: #5B21B6;
-
-	    --color-text-logo: #F9A8D4;
-	    --color-text-primary: #FFFFFF;
-	    --color-text-secondary: #E9D5FF;
-	    --color-text-paragraph: #C4B5FD;
-	    --color-text-icon: #FAF5FF;
-	    --color-text-link: #EC4899;
-	    --color-text-greet: #E879F9;
-
-	    --color-icon-social: #C084FC;
-	    --color-icon-lang: #A855F7;
     }
 }
 
@@ -447,6 +439,20 @@
 	filter: blur(5px);
 	opacity: .6;
 	border: none;
+    }
+
+    .slide-in-view {
+	transform: translateX(-100%);
+    }
+
+    .smooth-scroll {
+	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+    }
+
+    .section {
+	scroll-snap-align: start;
     }
 
     @keyframes glow {

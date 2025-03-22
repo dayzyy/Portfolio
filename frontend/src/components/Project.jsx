@@ -97,9 +97,9 @@ export default function Project({name, description, screenshots, link, is_shown,
 	    />
 	}
 
-	<div className={`project-box ${is_shown ? 'open-box' : ''}`}>
+	<div id={name} className={`project-box ${is_shown ? 'open-box' : ''}`}>
 	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
-		<h1>{name}</h1>
+		<h1 className="text-[var(--color-icon-lang)]">{name}</h1>
 
 		<div className="about-icon flex gap-1 items-center">
 		    <p className="hidden md:block">about</p>
@@ -123,7 +123,7 @@ export default function Project({name, description, screenshots, link, is_shown,
 			    return (
 				<img 
 				    key={screen}
-				    className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer
+				    className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer border border-rounded border-[var(--color-text-secondary)]
 						${inFocus == index 
 						  ? 'show-screen'
 						  : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}

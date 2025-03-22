@@ -6,13 +6,15 @@ import Skills from "./components/Skills.jsx"
 import SeeWork from "./components/SeeWork.jsx"	
 import Projects from "./components/Projects.jsx"
 import Theme from "./components/Theme.jsx"
+import Language from "./components/Language.jsx"
 
 export default function App() {
     useEffect(_ => {
 	//disable scrolling for first 2800ms after page loads, to wait for the start animations to finish
-	document.documentElement.style.overflow = 'hidden'
+	document.querySelector('main').style.overflowY = 'hidden'
+
 	setTimeout(_ => {
-	    document.documentElement.style.overflow = 'auto'
+	    document.querySelector('main').style.overflowY = 'auto'
 	}, 2800)
 
 	const load = _ => {
@@ -22,12 +24,26 @@ export default function App() {
 
 	window.addEventListener('load', load)
 
-	return _ => window.removeEventListener('load', load)
+	const observer = new IntersectionObserver(entries => {
+	    entries.forEach(entry => {
+		if (entry.isIntersecting) {
+		    entry.target.style.animation = 'slide-x .5s ease forwards'
+		}
+	    })
+	})
+
+	const elements_to_animate = document.querySelectorAll('.slide-in-view')
+	elements_to_animate.forEach(entry => observer.observe(entry))
+
+	return _ => {
+	    window.removeEventListener('load', load)
+	    elements_to_animate.forEach(entry => observer.unobserve(entry))
+	}
     }, [])
   
     return (
-	<main className="bg-[var(--color-bg)] overflow-hidden">
-	    <div className="min-h-screen w-screen p-4 flex flex-col gap-16">
+	<main className="bg-[var(--color-bg)] smooth-scroll">
+	    <div className="section min-h-screen w-screen p-4 flex flex-col gap-16">
 		<header className="flex-grow-0 flex justify-between items-center">
 		    <Logo/>
 		    <CV/>
@@ -39,7 +55,7 @@ export default function App() {
 			    <div className="flex flex-col gap-0">
 				<p className="trim text-[var(--color-text-greet)]">hi, i am</p>
 				<h1 className="trim">Luka Mania</h1>
-				<h2 className="trim text-[var(--color-text-secondary)]">Web Developer</h2>
+				<h3 className="trim text-[var(--color-text-secondary)]">Web Developer</h3>
 			    </div>
 
 			    <Information/>
@@ -62,9 +78,19 @@ export default function App() {
 		</section>
 	    </div>
 
-	    <div className="w-screen py-[8rem] p-4 flex">
+	    <div className="section min-h-screen w-screen bg-[var(--color-bg-card)] p-4 grid place-items-center">
 		<section className="w-full flex flex-col items-center gap-12">
 		    <Projects/>
+		</section>
+	    </div> 
+
+	    <div className="section min-h-screen w-screen p-4 bg-[var(--color-bg-card)] grid place-items-center">
+		<section className="w-full flex flex-col justify-start gap-12">
+		    <h1 className="slide-in-view"> I am bilingual. I fluently possess...</h1>
+		    
+		    <Language language='Georgian' description='Native'/>
+		    <Language language='English' description='Have been persistenly studying it since childhood'/>
+		    <Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
 		</section>
 	    </div> 
 	</main>

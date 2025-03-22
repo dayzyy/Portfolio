@@ -17,6 +17,9 @@ export default function Projects() {
 		if (entry.isIntersecting) {
 		    entry.target.style.animation = 'slide-x .5s ease forwards'
 		}
+		if (entry.target.id == inFocus && !entry.isIntersecting) {
+		    setInFocus(null)
+		}
 	    })
 	})
 
@@ -30,7 +33,11 @@ export default function Projects() {
 		observer.unobserve(entry)
 	    })
 	}
-    }, [])
+    }, [inFocus])
+
+    useEffect(_ => {
+	document.querySelector('main').style.scrollSnapType = inFocus ? 'none' : 'y mandatory'
+    }, [inFocus])
 
     const projects = [
 	{

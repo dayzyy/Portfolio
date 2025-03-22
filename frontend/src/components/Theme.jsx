@@ -2,20 +2,19 @@ import { useState, useEffect } from "react"
 
 export default function Theme() {
     const [mounted, setMounted] = useState(true)
-    const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || {name: "original", color: "#64748B" })
-    const [themeName, setThemeName] = useState(JSON.parse(localStorage.getItem('theme')).name || "original")
+    const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || {name: "retro", color: "#C2410C" })
+    const [themeName, setThemeName] = useState(JSON.parse(localStorage.getItem('theme'))?.name || "original")
     const [toggled, setToggled] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
     const themes = [
-	{name: "dark", color: "#1E293B" },
+	{name: "retro", color: "#C2410C" },
 	{name: "original", color: "#64748B" },
 	{name: "light", color: "#E2E8F0" },
-	{name: "retro", color: "#C2410c" },
+	{name: "forest", color: "#2D6A4F" },
+	{name: "dark", color: "#1E293B" },
 	{name: "solarized", color: "#268BD2" },
 	{name: "neon", color: "#F472B6" },
-	{name: "forest", color: "#2D6A4F" },
-	{name: "grape", color: "#5B21B6" },
     ]
 
     const toggle_theme = _ => {
