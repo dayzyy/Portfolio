@@ -8,6 +8,7 @@ import Projects from "./components/Projects.jsx"
 import Theme from "./components/Theme.jsx"
 import Language from "./components/Language.jsx"
 import ToggleScroll from "./components/ToggleScroll.jsx"
+import ListItem from "./components/ListItem.jsx"
 
 export default function App() {
     useEffect(_ => {
@@ -19,7 +20,7 @@ export default function App() {
 	    })
 	})
 
-	const elements_to_animate = document.querySelectorAll('.slide-in-view')
+	const elements_to_animate = document.querySelectorAll('.slide-in-view-left, .slide-in-view-right')
 	elements_to_animate.forEach(entry => observer.observe(entry))
 
 	return _ => elements_to_animate.forEach(entry => observer.unobserve(entry))
@@ -63,15 +64,35 @@ export default function App() {
 	    </div>
 
 	    <div className="section min-h-screen w-screen p-4 bg-[var(--color-bg-card)] grid place-items-center">
-		<section className="w-full h-full flex flex-col justify-around">
+		<section className="w-full h-full flex flex-col">
 		    <ToggleScroll/>
 
-		    <div className="flex-grow w-full flex flex-col justify-center gap-12">
-			<h1 className="slide-in-view"> I am bilingual. I fluently speak...</h1>
-			
-			<Language language='Georgian' description='Native'/>
-			<Language language='English' description='Have been persistenly studying it since childhood'/>
-			<Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
+		    <div className="flex-grow flex">
+			<div className="flex-grow w-full flex flex-col justify-around md:py-4 md:px-12">
+			    <div className="flex flex-col justify-center gap-8">
+				<h1 className="slide-in-view-left"> I am bilingual. I fluently speak...</h1>
+				
+				<div className="flex flex-col gap-6">
+				    <Language language='Georgian' description='Native'/>
+				    <Language language='English' description='Have been persistenly studying it since childhood'/>
+				    <Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
+				</div>
+			    </div>
+
+			    <div className="flex flex-col justify-center gap-6">
+				<h1 className="slide-in-view-right"> I also have</h1>
+				
+				<div className="flex flex-col gap-4">
+				    <ListItem text='80wpm'/>
+				    <ListItem text='Chess elo of 1600 online'/>
+				    <ListItem text='5 siblings:D'/>
+				    <ListItem text='An evil dog'/>
+				</div>
+			    </div>
+			</div>
+
+			<div className="w-[5rem] hl">
+			</div>
 		    </div>
 		</section>
 	    </div> 

@@ -487,10 +487,6 @@
 	border: none;
     }
 
-    .slide-in-view {
-	transform: translateX(-100%);
-    }
-
     .smooth-scroll {
 	scroll-snap-type: y mandatory;
 	height: 100vh;
@@ -503,6 +499,15 @@
     .go-on-screen {
 	transform: translateX(0);
     }
+
+    .slide-in-view-left {
+	transform: translateX(-100%);
+    }
+
+    .slide-in-view-right {
+	transform: translateX(100%);
+    }
+
 
     @keyframes glow {
 	0%   { box-shadow: none; }
