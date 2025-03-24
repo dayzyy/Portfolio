@@ -7,6 +7,7 @@ import { FaAngleRight } from "react-icons/fa";
 
 export default function Project({name, description, screenshots, link, is_shown, on_toggle}) {
     const [offScreen, setOffScreen] = useState(true)
+    const [showContent, setShowContent] = useState(false)
     const [inFocus, setInFocus] = useState(0)
     const [focusToggler, setFocusToggler] = useState(null)
     const changedManually = useRef(false)
@@ -47,8 +48,10 @@ export default function Project({name, description, screenshots, link, is_shown,
     useEffect(_ => {
 	if (is_shown) {
 	    setOffScreen(false)
+	    setTimeout(_ => setShowContent(true), 100)
 	} else {
-	    setTimeout(_ => setOffScreen(true), 200)
+	    setShowContent(false)
+	    setTimeout(_ => setOffScreen(true), 300)
 	}
     }, [is_shown])
 
@@ -97,8 +100,10 @@ export default function Project({name, description, screenshots, link, is_shown,
 	    />
 	}
 
-	<div id={name} className={`project-box ${is_shown ? 'open-box' : ''}`}>
-	    <div onClick={handle_click_project} className={`w-full flex justify-between items-center cursor-pointer`}>
+	<div id={name} className={`project-box ${is_shown ? 'open-box' : ''} ${offScreen ? 'cursor-pointer' : ''}`}
+	    onClick={offScreen ? handle_click_project : null}	
+	>
+	    <div onClick={e => {e.stopPropagation(); handle_click_project()}} className={`w-full flex justify-between items-center cursor-pointer select-none`}>
 		<h1 className="text-[var(--color-icon-lang)]">{name}</h1>
 
 		<div className="about-icon flex gap-1 items-center">
@@ -107,56 +112,53 @@ export default function Project({name, description, screenshots, link, is_shown,
 		</div>
 	    </div>
 
-	    <div className={`${offScreen && 'off-screen'} flex flex-col gap-16`}>
-		<div className={`about-project ${!is_shown ? '-translate-x-[100vw] opacity-0' : 'translate-x-[0] opacity-100'}
-		    ${offScreen && 'off-screen'} flex flex-col gap-4`}>
-		    {description}
-		    <p><a href={link}>{link}</a></p>
-		</div>
+	    {!offScreen &&
+		<div className={`${showContent ? 'go-on-screen' : ''} project-desc flex flex-col gap-16`}>
+		    <div className={`about-project flex flex-col gap-4`}>
+			{description}
+			<p><a href={link}>{link}</a></p>
+		    </div>
 
-		<div className={`screenshots relative flex flex-col gap-4 items-center w-full h-fit self-center
-				${is_shown && 'slide-in'}
-				${offScreen ? 'off-screen' : ''}
-				overflow-x-hidden`}>
-		    {
-			screenshots.names.map((screen, index) => {
-			    return (
-				<img 
-				    key={screen}
-				    className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer border border-rounded border-[var(--color-text-secondary)]
-						${inFocus == index 
-						  ? 'show-screen'
-						  : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}
-						${offScreen ? 'off-screen' : ''}
-					       `}
-				    style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
-				    src={`screenshots/${screenshots.dir}/${vpMobile ? 'mobile' : 'desktop'}/${screen}`}
-				    onClick={_ => handle_click_image(index)}
+		    <div className={`screenshots relative flex flex-col gap-4 items-center w-full h-fit self-center overflow-x-hidden`}>
+			{
+			    screenshots.names.map((screen, index) => {
+				return (
+				    <img 
+					key={screen}
+					className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer border border-rounded border-[var(--color-text-secondary)]
+						    ${inFocus == index 
+						      ? 'show-screen'
+						      : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}`}
+					style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
+					src={`screenshots/${screenshots.dir}/${vpMobile ? 'mobile' : 'desktop'}/${screen}`}
+					onClick={_ => handle_click_image(index)}
+				    />
+				)
+			    })
+			}
+
+			{
+			    vpMobile && 
+			    <div className="flex w-5/6 justify-around">
+				<FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
+					     onClick={inFocus == 0
+						 ? e => e.stopPropagation()
+						 : e => handle_click_arrow(e, -1)
+					     }
 				/>
-			    )
-			})
-		    }
 
-		    {
-			vpMobile && 
-			<div className="flex w-5/6 justify-around">
-			    <FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
-					 onClick={inFocus == 0
-					     ? e => e.stopPropagation()
-					     : e => handle_click_arrow(e, -1)
-					 }
-			    />
-
-			    <FaAngleRight className={`arrow ${inFocus == (screenshots.names.length - 1) && 'opacity-[.1]'}`}
-					  onClick={inFocus == (screenshots.names.length - 1)
-					      ? e => e.stopPropagation()
-					      : e => handle_click_arrow(e, 1)
-					  }
-			    />
-			</div>
-		    }
+				<FaAngleRight className={`arrow ${inFocus == (screenshots.names.length - 1) && 'opacity-[.1]'}`}
+					      onClick={inFocus == (screenshots.names.length - 1)
+						  ? e => e.stopPropagation()
+						  : e => handle_click_arrow(e, 1)
+					      }
+				/>
+			    </div>
+			}
+		    </div>
 		</div>
-	    </div>
+	    }
+
 	</div>
     </>)
 }

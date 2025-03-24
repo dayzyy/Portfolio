@@ -22,10 +22,10 @@ export default function ToggleScroll() {
     useEffect(_ => {
 	//disable scrolling for first 2800ms after page loads, to wait for the start animations to finish
 	const main = document.querySelector('main')
-	main.style.overflowY = 'hidden'
+	main.style.overflow = 'hidden'
 
 	setTimeout(_ => {
-	    main.style.overflowY = 'auto'
+	    main.style.overflow = 'auto'
 	    main.style.scrollSnapType = toggled ? 'y mandatory' : 'none'
 	}, 2800)
 

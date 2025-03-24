@@ -289,13 +289,13 @@
 	transition: border-color .4s ease;
     }
 
-    .about-project {
-	color: var(--color-text-paragraph);
-	transition: all .4s ease;
-    }
-
     .about-project p:first-of-type {
 	max-width: 60em;
+    }
+
+    .project-desc {
+	transform: translateX(-100vw);
+	transition: transform .4s ease;
     }
 
     #personal-projects {transform: translateX(-100%);}
@@ -304,11 +304,6 @@
 	color: var(--color-text-secondary);
 	font-size: 1.3rem;
 	transition: .2s ease;
-    }
-
-    .screenshots {
-	transform: translateX(-100vw);
-	transition: transform .4s ease;
     }
 
     .screenshots img {
@@ -446,10 +441,6 @@
     .open-box {
 	border-bottom: transparent;
     }
-
-    .slide-in {
-	transform: translateX(0);
-    }
     
     .hide-screen-left, .hide-screen-right {
 	position: absolute;
@@ -462,12 +453,6 @@
     .show-screen {
 	position: relative;
 	z-index: 9000 !important;
-    }
-
-    .off-screen {
-	position: absolute;
-	margin: 0;
-	padding: 0;
     }
 
     .show-image {
@@ -499,13 +484,16 @@
     }
 
     .smooth-scroll {
-	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
 	height: 100vh;
     }
 
     .section {
 	scroll-snap-align: start;
+    }
+
+    .go-on-screen {
+	transform: translateX(0);
     }
 
     @keyframes glow {

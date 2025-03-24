@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 export default function Theme() {
-    const [mounted, setMounted] = useState(true)
+    const [mounted, setMounted] = useState(false)
     const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || {name: "retro", color: "#C2410C" })
     const [themeName, setThemeName] = useState(JSON.parse(localStorage.getItem('theme'))?.name || "original")
     const [toggled, setToggled] = useState(false)
@@ -27,8 +27,8 @@ export default function Theme() {
 
     useEffect(_ => {
 	const timeout = setTimeout(_ => {
-	    setMounted(false)
-	}, 4000)
+	    setMounted(true)
+	}, 5000)
 
 	return _ => clearTimeout(timeout)
     }, [])
@@ -79,8 +79,8 @@ export default function Theme() {
 
 	    <p onClick={toggle_theme}
 	       className={`cursor-pointer select-none 
-			  ${mounted ? '' : toggled ? 'opacity-0' : 'opacity-100'}
-			  ${mounted ? 'theme-name-animate' : ''}
+			  ${!mounted ? '' : (toggled ? 'opacity-0' : 'opacity-100')}
+			  ${!mounted ? 'theme-name-animate' : ''}
 			 `}>
 	       "{themeName}"</p>
 	</div>
