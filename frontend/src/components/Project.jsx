@@ -125,9 +125,9 @@ export default function Project({name, description, screenshots, link, is_shown,
 				return (
 				    <img 
 					key={screen}
-					className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer border border-rounded border-[var(--color-text-secondary)]
+					className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer
 						    ${inFocus == index 
-						      ? 'show-screen'
+						      ? 'show-screen border border-rounded border-[var(--color-bg-card)]'
 						      : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}`}
 					style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
 					src={`screenshots/${screenshots.dir}/${vpMobile ? 'mobile' : 'desktop'}/${screen}`}

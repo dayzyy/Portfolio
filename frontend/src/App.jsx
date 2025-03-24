@@ -67,7 +67,7 @@ export default function App() {
 		    <ToggleScroll/>
 
 		    <div className="flex-grow w-full flex flex-col justify-center gap-12">
-			<h1 className="slide-in-view"> I am bilingual. I fluently possess...</h1>
+			<h1 className="slide-in-view"> I am bilingual. I fluently speak...</h1>
 			
 			<Language language='Georgian' description='Native'/>
 			<Language language='English' description='Have been persistenly studying it since childhood'/>

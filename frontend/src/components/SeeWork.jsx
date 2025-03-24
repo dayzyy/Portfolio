@@ -19,7 +19,7 @@ export default function SeeWork() {
 
     return (
 	<div id="work" className="flex items-center gap-4">
-	    <p className={`${isScrolled && 'opacity-0'}`}>see my work</p>
+	    <p className={`${isScrolled && 'opacity-0'}`}>see more</p>
 
 	    <div className={`flex flex-col text-[var(--color-text-primary)] ${isScrolled && 'opacity-0'}`}>
 		<FaAngleDown/>

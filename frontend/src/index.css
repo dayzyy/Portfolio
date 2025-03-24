@@ -92,6 +92,7 @@
 
 	--color-glow-on: #38BDF8;  /* Green */
 	--color-glow-off: #EF4444; /* Red */
+	--color-shadow: rgba(0, 0, 0, .2);
     }
 
     [data-theme="dark"] {
@@ -111,6 +112,7 @@
 
 	--color-glow-on: #10B981;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .5);
     }
 
     [data-theme="light"] {
@@ -130,6 +132,7 @@
 
 	--color-glow-on: #10B981;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .1);
     }
 
     [data-theme="retro"] {
@@ -149,6 +152,7 @@
 
 	--color-glow-on: #FCA311;  /* Yellow/Orange */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .1);
     }
 
     [data-theme="solarized"] {
@@ -168,6 +172,7 @@
 
 	--color-glow-on: #268BD2;  /* Blue */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .5);
     }
 
     [data-theme="neon"] {
@@ -187,6 +192,7 @@
 
 	--color-glow-on: #F472B6;  /* Pink */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .5);
     }
 
     [data-theme="forest"] {
@@ -206,6 +212,7 @@
 
 	--color-glow-on: #52B788;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
+	--color-shadow: rgba(0, 0, 0, .5);
     }
 }
 
@@ -246,6 +253,7 @@
      .skillcard {
 	transform: translateY(100vh);
 	animation: slide-y .4s ease 1.9s forwards;
+	box-shadow: 7px 7px 5px var(--color-shadow);
      }
 
      .skillcard:nth-of-type(2) {animation-delay: 2s;}

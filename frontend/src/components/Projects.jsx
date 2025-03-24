@@ -41,6 +41,20 @@ export default function Projects() {
 	}
     }, [inFocus])
 
+    useEffect(_ => {
+	if (!inFocus) return
+
+	const element = document.getElementById(inFocus)
+	if (!element) return
+
+	setTimeout(_ => {
+	    element.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start'
+	    })
+	}, 300)
+    }, [inFocus])
+
     const projects = [
 	{
 	 name: 'Social Media',
