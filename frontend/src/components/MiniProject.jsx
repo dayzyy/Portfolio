@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-export default function MiniProject({icon, description}) {
+export default function MiniProject({icon, description, on_click}) {
     const timeoutRef = useRef(null)
 
     const handle_hover = (state) => {
@@ -18,10 +18,12 @@ export default function MiniProject({icon, description}) {
     }
 
     return (
-	<div className="w-[3rem] h-[3rem] flex justify-end">
+	<div className="mini-project-wrapper w-[3rem] h-[3rem] flex justify-end">
 	    <div className="mini-project flex-shrink-0 w-full h-full bg-[var(--color-bg-program)] rounded-xl flex items-center justify-end px-[.75rem] cursor-pointer"
 	         onMouseEnter={_ => handle_hover(true)}
-	         onMouseLeave={_ => handle_hover(false)}>
+	         onMouseLeave={_ => handle_hover(false)}
+		 onClick={on_click}
+	    >
 
 		<p className="hidden whitespace-nowrap opacity-0"
 		   id={description}

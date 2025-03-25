@@ -455,9 +455,11 @@
 
     #magic-bar {
 	box-shadow: 7px 7px 10px var(--color-shadow);
+	transform: translateX(130%);
     }
 
     .mini-project {
+	scale: 0;
 	transition: width .5s ease,
 		    height .2s ease;
     }
@@ -527,6 +529,7 @@
 
     .show-theme {
 	animation: glow 3s infinite;
+	filter: blur(1px);
     }
 
     .hide-theme {
