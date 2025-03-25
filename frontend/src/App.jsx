@@ -9,6 +9,7 @@ import Theme from "./components/Theme.jsx"
 import Language from "./components/Language.jsx"
 import ToggleScroll from "./components/ToggleScroll.jsx"
 import ListItem from "./components/ListItem.jsx"
+import MagicBar from "./components/MagicBar.jsx"
 
 export default function App() {
     useEffect(_ => {
@@ -28,7 +29,7 @@ export default function App() {
   
     return (
 	<main className="bg-[var(--color-bg)] smooth-scroll">
-	    <div className="section min-h-screen w-screen p-4 flex flex-col gap-16">
+	    <div className="section min-h-screen w-screen p-4 md:p-8 flex flex-col gap-16">
 		<header className="flex-grow-0 flex justify-between items-center">
 		    <Logo/>
 		    <CV/>
@@ -63,12 +64,12 @@ export default function App() {
 		</section>
 	    </div>
 
-	    <div className="section min-h-screen w-screen p-4 bg-[var(--color-bg-card)] grid place-items-center">
+	    <div className="section min-h-screen w-screen p-4 md:px-12 bg-[var(--color-bg-card)] grid place-items-center">
 		<section className="w-full h-full flex flex-col">
 		    <ToggleScroll/>
 
 		    <div className="flex-grow flex">
-			<div className="flex-grow w-full flex flex-col justify-around md:py-4 md:px-12">
+			<div className="flex-grow w-full flex flex-col justify-around">
 			    <div className="flex flex-col justify-center gap-8">
 				<h1 className="slide-in-view-left"> I am bilingual. I fluently speak...</h1>
 				
@@ -91,8 +92,7 @@ export default function App() {
 			    </div>
 			</div>
 
-			<div className="w-[5rem] hl">
-			</div>
+			<MagicBar/>
 		    </div>
 		</section>
 	    </div> 

@@ -78,6 +78,8 @@
     [data-theme="original"] {
 	--color-bg: #475569;
 	--color-bg-card: #64748B;
+	--color-bg-sidebar: #475061; /* Slightly darker than #64748B */
+	--color-bg-program: #3B4B5C; /* darker than sidebar */
 
 	--color-text-logo: #A5F3FC;
 	--color-text-primary: #FFFFFF;
@@ -89,6 +91,7 @@
 
 	--color-icon-social: #67E8F9;
 	--color-icon-lang: #F0F9FF;
+	--color-icon-program: #A5F3FC; /* bright cyan */
 
 	--color-glow-on: #38BDF8;  /* Green */
 	--color-glow-off: #EF4444; /* Red */
@@ -98,6 +101,8 @@
     [data-theme="dark"] {
 	--color-bg: #1E293B;
 	--color-bg-card: #334155;
+	--color-bg-sidebar: #1C2533; /* Slightly darker than #334155 */
+	--color-bg-program: #2A3444; /* muted slate */
 
 	--color-text-logo: #FACC15;
 	--color-text-primary: #FFFFFF;
@@ -109,6 +114,7 @@
 
 	--color-icon-social: #60A5FA;
 	--color-icon-lang: #93C5FD;
+	--color-icon-program: #FACC15; /* yellow */
 
 	--color-glow-on: #10B981;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
@@ -118,6 +124,8 @@
     [data-theme="light"] {
 	--color-bg: #F8FAFC;
 	--color-bg-card: #E2E8F0;
+	--color-bg-sidebar: #D8DEE9; /* Slightly darker than #E2E8F0 */
+	--color-bg-program: #CBD5E1; /* light gray */
 
 	--color-text-logo: #0284C7;
 	--color-text-primary: #1E293B;
@@ -129,6 +137,7 @@
 
 	--color-icon-social: #2563EB;
 	--color-icon-lang: #0284C7;
+	--color-icon-program: #1E293B; /* dark blue */
 
 	--color-glow-on: #10B981;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
@@ -138,6 +147,8 @@
     [data-theme="retro"] {
 	--color-bg: #F4E1C4;
 	--color-bg-card: #EAD9C3;
+	--color-bg-sidebar: #D8C3AC; /* Slightly darker than #EAD9C3 */
+	--color-bg-program: #D0B49F; /* muted tan */
 
 	--color-text-logo: #C2410C;
 	--color-text-primary: #3F2305;
@@ -149,6 +160,7 @@
 
 	--color-icon-social: #FFB703;
 	--color-icon-lang: #D97706;
+	--color-icon-program: #C2410C; /* vintage orange */
 
 	--color-glow-on: #FCA311;  /* Yellow/Orange */
 	--color-glow-off: #EF4444;  /* Red */
@@ -158,6 +170,8 @@
     [data-theme="solarized"] {
 	--color-bg: #002B36;
 	--color-bg-card: #073642;
+	--color-bg-sidebar: #062C36; /* Slightly darker than #073642 */
+	--color-bg-program: #00212B; /* very dark cyanish base */
 
 	--color-text-logo: #B58900;
 	--color-text-primary: #FDF6E3;
@@ -169,6 +183,7 @@
 
 	--color-icon-social: #CB4B16;
 	--color-icon-lang: #268BD2;
+	--color-icon-program: #B58900; /* mustard yellow */
 
 	--color-glow-on: #268BD2;  /* Blue */
 	--color-glow-off: #EF4444;  /* Red */
@@ -178,6 +193,8 @@
     [data-theme="neon"] {
 	--color-bg: #0F172A;
 	--color-bg-card: #1E293B;
+	--color-bg-sidebar: #111827; /* Slightly darker than #1E293B */
+	--color-bg-program: #1A2336; /* rich deep blue */
 
 	--color-text-logo: #F472B6;
 	--color-text-primary: #FFFFFF;
@@ -189,6 +206,7 @@
 
 	--color-icon-social: #F43F5E;
 	--color-icon-lang: #6366F1;
+	--color-icon-program: #F472B6; /* neon pink */
 
 	--color-glow-on: #F472B6;  /* Pink */
 	--color-glow-off: #EF4444;  /* Red */
@@ -198,6 +216,8 @@
     [data-theme="forest"] {
 	--color-bg: #1B4332;
 	--color-bg-card: #2D6A4F;
+	--color-bg-sidebar: #163A2C; /* Slightly darker than #2D6A4F */
+	--color-bg-program: #264D3C; /* earthy dark green */
 
 	--color-text-logo: #74C69D;
 	--color-text-primary: #FFFFFF;
@@ -209,6 +229,7 @@
 
 	--color-icon-social: #81E6D9; 
 	--color-icon-lang: #80ED99;
+	--color-icon-program: #A7F3D0; /* soft mint */
 
 	--color-glow-on: #52B788;  /* Green */
 	--color-glow-off: #EF4444;  /* Red */
@@ -430,6 +451,33 @@
 	background: transparent;
 	box-shadow: var(--pseudo-before-shadow);
 	transition: .3s ease;
+    }
+
+    #magic-bar {
+	box-shadow: 7px 7px 10px var(--color-shadow);
+    }
+
+    .mini-project {
+	transition: width .5s ease,
+		    height .2s ease;
+    }
+
+    .mini-project i {
+	transition: font-size .2s ease;
+    }
+
+    .mini-project:hover {
+	gap: 2rem;
+	width: 18rem !important;
+	height: 4rem !important;
+    }
+
+    .mini-project:hover > p {
+	animation: fade-in .2s ease .1s forwards;
+    }
+
+    .mini-project:hover > i {
+	font-size: 190% !important;
     }
 }
 
