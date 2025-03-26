@@ -481,6 +481,81 @@
     .mini-project:hover > i {
 	font-size: 190% !important;
     }
+
+    .modal {
+	animation: fade-in .5s ease forwards;
+    }
+
+    .modal * {
+	color: #fff;
+    }
+
+    .mini-program > *, .square {
+	opacity: 0;
+	animation: fade-in .5s ease .5s forwards;
+    }
+
+    #tic-tac-toe-board {
+	display: grid;
+	place-content: center;
+	grid-template-columns: 8rem 8rem 8rem;
+	grid-template-rows: 8rem 8rem 8rem;
+    }
+
+    .square {
+    }
+
+    .square:nth-of-type(1), .square:nth-of-type(4), .square:nth-of-type(5){
+	border: none;
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+    }
+
+    .square:nth-of-type(2) {
+	border: none;
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+    }
+
+    .square:nth-of-type(3), .square:nth-of-type(6) {
+	border: none;
+	border-bottom: 1px solid #fff;
+    }
+    .square:nth-of-type(7), .square:nth-of-type(8) {
+	border: none;
+	border-right: 1px solid #fff;
+    }
+
+    .x-o {
+	font-size: 5rem;
+	transform: scale(0);
+	transition: transform .1s ease,
+		    box-shadow .3s ease;
+    }
+
+    .x-o-show {
+	transform: scale(1);
+    }
+
+    .turn {
+	transition: scale .1s ease,
+		    opacity .5s ease;
+    }
+
+    .result {
+	transform: scale(0);
+	transition: transform .5s ease;
+    }
+
+    .show-result {transform: scale(1);}
+    
+    .win-cell {
+	box-shadow: 0 0 10px 5px #92FF3F;
+    }
+
+    .lose-cell {
+	box-shadow: 0 0 10px 5px #FF2C2C;
+    }
 }
 
 @layer utilities {
@@ -570,11 +645,19 @@
 
      @keyframes slide-y { to {transform: translateY(0);} }
 
-     @keyframes fade-in { to {opacity: 1;} }
+     @keyframes fade-in { from {opacity: 0;} to {opacity: 1;} }
 
      @keyframes fade-out { from {opacity: 1;} to {opacity: 0;} }
 
      @keyframes scale-up { to {scale: 1;} }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
 }
     
 @media (min-width: 640px) {

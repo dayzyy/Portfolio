@@ -84,7 +84,7 @@ export default function App() {
 				<h1 className="slide-in-view-right"> I also have</h1>
 				
 				<div className="flex flex-col gap-4">
-				    <ListItem text='80wpm'/>
+				    <ListItem text='80-90wpm'/>
 				    <ListItem text='Chess elo of 1600 online'/>
 				    <ListItem text='5 siblings:D'/>
 				    <ListItem text='An evil dog'/>
