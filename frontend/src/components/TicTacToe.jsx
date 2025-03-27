@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineCircle } from "react-icons/md";
+import Loading from "./Loading";
 
 export default function TicTacToe() {
     const [playersTurn, setPlayersTurn] = useState(Math.floor(Math.random() * 2))
@@ -10,6 +11,8 @@ export default function TicTacToe() {
     const [growResult, setGrowResult] = useState(false)
     const playersShape = useRef(null)
     const [newGame, setNewGame] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [delay, setDelay] = useState(true)
 
     const [board, setBoard] = useState([
 	null, null, null,
@@ -98,10 +101,18 @@ export default function TicTacToe() {
 		el.classList.remove('x-o-show')
 	    }
 	}
-	setNewGame(prev => !prev)
+
+	setLoading(true)
+
+	setTimeout(_ => {
+	    setNewGame(prev => !prev)
+	    setLoading(false)
+	}, 500)
     }
 
     useEffect(_ => {
+	setTimeout(_ => setDelay(false), 500)
+
 	playersShape.current = playersTurn ? 'x' : 'o'
 
 	if (!playersTurn) {
@@ -138,6 +149,10 @@ export default function TicTacToe() {
 
 	return _ => clearTimeout(timeout)
     }, [lastMove])
+
+    if (delay) return <div className="flex-grow"></div>
+
+    if (loading) return <Loading/>
 
     return (
 	<div className="mini-program flex-grow flex flex-col justify-around">

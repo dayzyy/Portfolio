@@ -492,7 +492,7 @@
 
     .mini-program > *, .square {
 	opacity: 0;
-	animation: fade-in .5s ease .5s forwards;
+	animation: fade-in .5s ease forwards;
     }
 
     #tic-tac-toe-board {
