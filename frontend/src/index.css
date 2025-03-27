@@ -486,7 +486,10 @@
 	animation: fade-in .5s ease forwards;
     }
 
-    .modal * {
+    .modal > :not(.force-color),
+    .modal > *:not(.force-color),
+    .modal h1:not(.force-color)
+    {
 	color: #fff;
     }
 
@@ -500,9 +503,6 @@
 	place-content: center;
 	grid-template-columns: 8rem 8rem 8rem;
 	grid-template-rows: 8rem 8rem 8rem;
-    }
-
-    .square {
     }
 
     .square:nth-of-type(1), .square:nth-of-type(4), .square:nth-of-type(5){
@@ -533,10 +533,6 @@
 		    box-shadow .3s ease;
     }
 
-    .x-o-show {
-	transform: scale(1);
-    }
-
     .turn {
 	transition: scale .1s ease,
 		    opacity .5s ease;
@@ -546,14 +542,29 @@
 	transform: scale(0);
 	transition: transform .5s ease;
     }
-
-    .show-result {transform: scale(1);}
     
     .win-cell {
 	box-shadow: 0 0 10px 5px #92FF3F;
     }
 
     .lose-cell {
+	box-shadow: 0 0 10px 5px #FF2C2C;
+    }
+
+    #hangman .word h1, #hangman .last-guess {
+	font-size: 3rem;
+	text-transform: uppercase;
+    }
+
+    #hangman * {
+	user-select: none;
+    }
+
+    .correct-guess {
+	box-shadow: 0 0 10px 5px #92FF3F;
+    }
+
+    .wrong-guess {
 	box-shadow: 0 0 10px 5px #FF2C2C;
     }
 }
@@ -634,6 +645,11 @@
 	transform: translateX(100%);
     }
 
+    .x-o-show {
+	transform: scale(1);
+    }
+
+    .show-result {transform: scale(1);}
 
     @keyframes glow {
 	0%   { box-shadow: none; }

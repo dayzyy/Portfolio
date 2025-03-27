@@ -111,13 +111,15 @@ export default function TicTacToe() {
     }
 
     useEffect(_ => {
-	setTimeout(_ => setDelay(false), 500)
+	const timeout = setTimeout(_ => setDelay(false), 500)
 
 	playersShape.current = playersTurn ? 'x' : 'o'
 
 	if (!playersTurn) {
 	    setTimeout(_ => CPU_play(), 2000)
 	}
+
+	return _ => clearTimeout(timeout)
     }, [newGame])
 
     useEffect(_ => {

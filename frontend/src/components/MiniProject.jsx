@@ -29,7 +29,7 @@ export default function MiniProject({icon, description, on_click}) {
 		   id={description}
 		>{description}</p>
 
-		<i className="text-[var(--color-icon-program)] text-[150%] group-hover:text-[170%]">{icon}</i>
+		<i className="text-[var(--color-icon-program)] text-[150%]">{icon}</i>
 	    </div>
 	</div>
     )
