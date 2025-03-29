@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Logo from "./components/Logo.jsx"
 import CV from "./components/CV.jsx"
 import Information from "./components/Information.jsx"
@@ -12,7 +12,15 @@ import ListItem from "./components/ListItem.jsx"
 import MagicBar from "./components/MagicBar.jsx"
 
 export default function App() {
+    const [wpMobile, setWpMobile] = useState(window.innerWidth < 768)
+
     useEffect(_ => {
+	const handle_resize = _ => {
+	    setWpMobile(window.innerWidth < 768)
+	}
+
+	window.addEventListener('resize', handle_resize)
+
 	const observer = new IntersectionObserver(entries => {
 	    entries.forEach(entry => {
 		if (entry.isIntersecting) {
@@ -24,7 +32,10 @@ export default function App() {
 	const elements_to_animate = document.querySelectorAll('.slide-in-view-left, .slide-in-view-right')
 	elements_to_animate.forEach(entry => observer.observe(entry))
 
-	return _ => elements_to_animate.forEach(entry => observer.unobserve(entry))
+	return _ => {
+	    elements_to_animate.forEach(entry => observer.unobserve(entry))
+	    window.removeEventListener('resize', handle_resize)
+	}
     }, [])
   
     return (
@@ -65,15 +76,15 @@ export default function App() {
 	    </div>
 
 	    <div className="section min-h-screen w-screen p-4 md:px-12 bg-[var(--color-bg-card)] grid place-items-center">
-		<section className="w-full h-full flex flex-col">
+		<section className="w-full h-full flex flex-col gap-12 md:gap-0">
 		    <ToggleScroll/>
 
 		    <div className="flex-grow flex">
-			<div className="flex-grow w-full flex flex-col justify-around">
-			    <div className="flex flex-col justify-center gap-8">
+			<div className="flex-grow w-full flex flex-col justify-around gap-12 md:gap-0">
+			    <div className="flex flex-col justify-center gap-6">
 				<h1 className="slide-in-view-left"> I am bilingual. I fluently speak...</h1>
 				
-				<div className="flex flex-col gap-6">
+				<div className="flex flex-col gap-3 md:gap-6">
 				    <Language language='Georgian' description='Native'/>
 				    <Language language='English' description='Have been persistenly studying it since childhood'/>
 				    <Language language='Russian' description='Watched a lot of SpongeBob in russian growing up'/>
@@ -90,9 +101,11 @@ export default function App() {
 				    <ListItem text='An evil dog'/>
 				</div>
 			    </div>
+
+			    {wpMobile && <MagicBar mobile_screen={wpMobile}/>}
 			</div>
 
-			<MagicBar/>
+			{!wpMobile && <MagicBar mobile_screen={wpMobile}/>}
 		    </div>
 		</section>
 	    </div> 

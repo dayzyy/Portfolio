@@ -14,8 +14,9 @@ import RandomFact from "./RandomFact";
 import RandomQuote from "./RandomQuote";
 import Modal from "./Modal";
 
-export default function MagicBar() {
+export default function MagicBar({mobile_screen}) {
     const [inFocus, setInFocus] = useState(null)
+    const [areScaled, setAreScaled] = useState(false)
 
     useEffect(_ => {
 	const observer = new IntersectionObserver(entries => {
@@ -24,6 +25,9 @@ export default function MagicBar() {
 		    entry.target.style.animation = 'slide-y .5s ease .7s forwards'
 		} else if (entry.isIntersecting) {
 		    entry.target.style.animation = `scale-up .5s ease ${(3 + index) / 10}s forwards`
+		    if (index == entries.length - 2) {
+			setTimeout(_ => setAreScaled(true), 1100)
+		    }
 		}
 	    })
 	})
@@ -44,7 +48,33 @@ export default function MagicBar() {
 	{icon: <MdFormatQuote/>, description: 'get a random quote', exe: <RandomQuote/>},
     ]
 
-    return (<>
+    if (mobile_screen) return (<>
+	{
+	    inFocus &&
+	    <Modal toggle_off={_ => setInFocus(null)}>
+		{inFocus}
+	    </Modal>
+	}
+
+	<div id="magic-bar" className="relative h-[4rem] w-full bg-[var(--color-bg-sidebar)] rounded-xl flex justify-around items-center">
+	    {
+		mini_projects.map(project => {
+		    return (
+			<MiniProject 
+			    scaled={areScaled}
+			    key={project.description}
+			    icon={project.icon}
+			    description={project.description}
+			    on_click={_ => setInFocus(project.exe)}
+			    mobile_screen={true}
+			/>
+		    )
+		})
+	    }	
+	</div>
+    </>)
+
+    else return (<>
 	{
 	    inFocus &&
 	    <Modal toggle_off={_ => setInFocus(null)}>
@@ -61,6 +91,7 @@ export default function MagicBar() {
 			    icon={project.icon}
 			    description={project.description}
 			    on_click={_ => setInFocus(project.exe)}
+			    mobile_screen={false}
 			/>
 		    )
 		})

@@ -171,17 +171,18 @@ export default function HangMan() {
 	    </div>
 
 	    <div className="w-full flex flex-wrap gap-12 items-end justify-around">
-		<div className="w-fit word flex gap-4 justify-center">
+		<div className={`w-fit word flex gap-4 justify-center p-4 transition-shadow duration-300 ${gameOver == 'win' ? 'correct-guess' : ''}`}>
+
 		    {
 			Array.from(word.word).map((letter, index) => {
 			    return (
 				<div 
 				    key={`letter ${index}`}
-				    className={`w-[3rem] flex justify-center border-b-2 px-4 items-center
+				    className={`w-[2rem] sm:w-[3rem] flex justify-center px-4 items-center border-b-2
 					transition-shadow duration-300
+					${gameOver == 'win' ? '!border-b-0' : ''}
 					${(correctGuess && letter == lastGuess) ? 'correct-guess' : ''}
 					${(showResult && unGuessedLetters.includes(letter)) ? 'wrong-guess' : ''}
-					${(showResult && gameOver == 'win') ? 'correct-guess' : ''}
 					`}>
 				    <h1 
 					className={`transition-opacity duration-300 ${guessed_letters.current.includes(letter) ? 'opacity-100' : 'opacity-0'}`}>
@@ -193,7 +194,7 @@ export default function HangMan() {
 		    }
 		</div>
 		
-		<h1>{word.description}</h1>
+		<h1 className="pb-2">{word.description}</h1>
 	    </div>
 
 	    <div className="flex justify-center w-full">
@@ -213,7 +214,7 @@ export default function HangMan() {
 		    }
 		</div>
 
-		<div className="absolute right-7 self-end w-fit border rounded-md solid p-3 cursor-pointer"
+		<div className="md:absolute right-7 self-end w-fit border rounded-md solid p-3 cursor-pointer"
 		    onClick={restart_game}
 		>
 		    <h1>restart</h1>

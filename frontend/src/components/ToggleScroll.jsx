@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 export default function ToggleScroll() {
     const [toggled, setToggled] = useState(_ => {
 	const savedValue = localStorage.getItem('scroll-snap')
-	return savedValue ? JSON.parse(savedValue) : true
+	return savedValue ? JSON.parse(savedValue) : (window.innerWidth >= 768 ? true : false)
     })
 
     const toggle = _ => {

@@ -455,31 +455,18 @@
 
     #magic-bar {
 	box-shadow: 7px 7px 10px var(--color-shadow);
-	transform: translateX(130%);
     }
 
     .mini-project {
 	scale: 0;
 	transition: width .5s ease,
-		    height .2s ease;
+		    height .2s ease,
+		    opacity .3s ease,
+		    transform .3s ease;
     }
 
     .mini-project i {
 	transition: font-size .2s ease;
-    }
-
-    .mini-project:hover {
-	gap: 2rem;
-	width: 18rem !important;
-	height: 4rem !important;
-    }
-
-    .mini-project:hover > p {
-	animation: fade-in .2s ease .1s forwards;
-    }
-
-    .mini-project:hover > i {
-	font-size: 190% !important;
     }
 
     .modal {
@@ -501,8 +488,8 @@
     #tic-tac-toe-board {
 	display: grid;
 	place-content: center;
-	grid-template-columns: 8rem 8rem 8rem;
-	grid-template-rows: 8rem 8rem 8rem;
+	grid-template-columns: 6.5rem 6.5rem 6.5rem;
+	grid-template-rows: 6.5rem 6.5rem 6.5rem;
     }
 
     .square:nth-of-type(1), .square:nth-of-type(4), .square:nth-of-type(5){
@@ -527,7 +514,7 @@
     }
 
     .x-o {
-	font-size: 5rem;
+	font-size: 4.5rem;
 	transform: scale(0);
 	transition: transform .1s ease,
 		    box-shadow .3s ease;
@@ -552,7 +539,7 @@
     }
 
     #hangman .word h1, #hangman .last-guess {
-	font-size: 3rem;
+	font-size: 2rem;
 	text-transform: uppercase;
     }
 
@@ -651,6 +638,17 @@
 
     .show-result {transform: scale(1);}
 
+    .hidden-program {
+	position: absolute;
+	opacity: 0;
+	cursor: auto;
+	pointer-events: none;
+    }
+
+    .shown-program {
+	position: absolute;
+    }
+    
     @keyframes glow {
 	0%   { box-shadow: none; }
 	50%  { box-shadow: 0 0 30px 15px var(--color-icon-lang); }
@@ -679,6 +677,39 @@
 @media (min-width: 640px) {
     .desktop-screenshot {
 	max-width: 600px;
+    }
+
+    #hangman .word h1, #hangman .last-guess {
+	font-size: 3rem;
+    }
+
+    #tic-tac-toe-board {
+	grid-template-columns: 8rem 8rem 8rem;
+	grid-template-rows: 8rem 8rem 8rem;
+    }
+
+    .x-o {
+	font-size: 5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #magic-bar {
+	transform: translateX(130%);
+    }
+
+    .mini-project:hover {
+	gap: 2rem;
+	width: 18rem !important;
+	height: 4rem !important;
+    }
+
+    .mini-project:hover > p {
+	animation: fade-in .2s ease .1s forwards;
+    }
+
+    .mini-project:hover > i {
+	font-size: 190% !important;
     }
 }
 
