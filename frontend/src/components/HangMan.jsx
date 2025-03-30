@@ -217,7 +217,7 @@ export default function HangMan() {
 		<div className="md:absolute right-7 self-end w-fit border rounded-md solid p-3 cursor-pointer"
 		    onClick={restart_game}
 		>
-		    <h1>restart</h1>
+		    <h1 className="leading-none px-[.1rem]">restart</h1>
 		</div>
 	    </div>
 	</div>

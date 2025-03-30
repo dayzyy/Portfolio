@@ -10,7 +10,7 @@ import MiniProject from "./MiniProject";
 import CMD from "./CMD";
 import TicTacToe from "./TicTacToe";
 import HangMan from "./HangMan";
-import RandomFact from "./RandomFact";
+import FunFact from "./FunFact";
 import RandomQuote from "./RandomQuote";
 import Modal from "./Modal";
 
@@ -44,7 +44,7 @@ export default function MagicBar({mobile_screen}) {
 	{icon: <VscTerminalCmd/>, description: 'cmd emulator', exe: <CMD/>},
 	{icon: <TbTicTac/>, description: 'play tic-tac-toe', exe: <TicTacToe/>},
 	{icon: <GiSlipknot/>, description: 'play hang-man', exe: <HangMan/>},
-	{icon: <FaQuestion/>, description: 'get a random fact', exe: <RandomFact/>},
+	{icon: <FaQuestion/>, description: 'get a fun fact', exe: <FunFact/>},
 	{icon: <MdFormatQuote/>, description: 'get a random quote', exe: <RandomQuote/>},
     ]
 

@@ -554,6 +554,27 @@
     .wrong-guess {
 	box-shadow: 0 0 10px 5px #FF2C2C;
     }
+
+    #fun-fact h2 {
+	color: #ccc;
+    }
+
+    #fun-fact .text-container {
+	width: 90%;
+    }
+
+    #fun-fact .text-container > h2:first-child {
+	color: #fff;
+	line-height: 1.5;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+    }
+
+    #fun-fact > h1 {
+	scale: 0;
+	animation: scale-up .5s ease forwards,
+		   fade-in .1s ease forwards;
+    }
 }
 
 @layer utilities {
@@ -690,6 +711,10 @@
 
     .x-o {
 	font-size: 5rem;
+    }
+
+    #fun-fact .text-container {
+	width: 60em;
     }
 }
 
