@@ -56,14 +56,15 @@ export default function RandomFact() {
 
     const handle_click = _ => {
 	clearTimeout(updateTimeout.current)
+	clearTimeout(loadingTimeout.current)
+
 	setFact(null)
 	setText([])
 	setShowSource(false)
 	setLoading(true)
 
 	loadingTimeout.current = setTimeout(_ => setLoading(false), 500)
-	
-	    updateTimeout.current = setTimeout(async _ => await fetch_fact(), 900)
+	updateTimeout.current = setTimeout(async _ => await fetch_fact(), 900)
     }
 
     if (delay) return <div className="flex-grow"></div>
@@ -73,7 +74,7 @@ export default function RandomFact() {
 
 	<div id="fun-fact" className="mini-program flex-grow flex flex-col gap-32 items-center">
 	    <h1>Did you know?</h1>
-	    <div className="flex-grow text-container flex flex-col gap-8">
+	    <div className="min-h-[15rem] text-container flex flex-col items-center gap-8">
 		<h2>{text.join("")}</h2>
 
 		{fact && 

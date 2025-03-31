@@ -555,22 +555,25 @@
 	box-shadow: 0 0 10px 5px #FF2C2C;
     }
 
-    #fun-fact h2 {
+    #fun-fact h2, #random-quote h2 {
 	color: #ccc;
     }
 
-    #fun-fact .text-container {
+    #fun-fact .text-container, #random-quote .text-container {
 	width: 90%;
     }
 
-    #fun-fact .text-container > h2:first-child {
+    #fun-fact .text-container > h2:first-child,
+    #random-quote .text-container > h2:first-child
+    {
 	color: #fff;
 	line-height: 1.5;
+	text-align: center;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
     }
 
-    #fun-fact > h1 {
+    #fun-fact > h1, #random-quote > h1 {
 	scale: 0;
 	animation: scale-up .5s ease forwards,
 		   fade-in .1s ease forwards;
@@ -713,7 +716,7 @@
 	font-size: 5rem;
     }
 
-    #fun-fact .text-container {
+    #fun-fact .text-container, #random-quote .text-container {
 	width: 60em;
     }
 }
