@@ -107,7 +107,6 @@ export default function Project({name, description, screenshots, link, is_shown,
 		<h1 className="text-[var(--color-icon-lang)]">{name}</h1>
 
 		<div className="about-icon flex gap-1 items-center">
-		    <p className="hidden md:block">about</p>
 		    <TbCaretDownFilled className={`${!is_shown ? '-rotate-90' : 'rotate-0'}`}/>
 		</div>
 	    </div>

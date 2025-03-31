@@ -10,6 +10,8 @@ import Language from "./components/Language.jsx"
 import ToggleScroll from "./components/ToggleScroll.jsx"
 import ListItem from "./components/ListItem.jsx"
 import MagicBar from "./components/MagicBar.jsx"
+import SocialsBar from "./components/SocialsBar.jsx"
+import Interested from "./components/Interested.jsx"
 
 export default function App() {
     const [wpMobile, setWpMobile] = useState(window.innerWidth < 768)
@@ -113,6 +115,13 @@ export default function App() {
 	    <div className="section min-h-screen w-screen bg-[var(--color-bg-card)] p-4 grid place-items-center">
 		<section className="w-full flex flex-col items-center gap-12">
 		    <Projects/>
+		</section>
+	    </div> 
+
+	    <div className="section min-h-screen w-screen bg-[var(--color-bg-card)] p-4 grid place-items-center">
+		<section className="w-full flex flex-col items-center gap-32">
+		    <Interested/>
+		    <SocialsBar/>
 		</section>
 	    </div> 
 	</main>

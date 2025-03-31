@@ -5,6 +5,7 @@
 
 @layer base {
     :root {
+	--size-text-large: 2rem;
 	--size-text-heading: 1.6rem;
 	--size-text-subheading: 1.4rem;
 	--size-text-medium: 1.1rem;
@@ -38,6 +39,10 @@
 	 font-family: var(--font-family-heading);
 	 font-size: var(--size-text-heading);
 	 font-weight: bold;
+     }
+
+     h1:is(.large) {
+	font-size: var(--size-text-large) !important;
      }
 
      h2 {
@@ -287,21 +292,21 @@
      #work > p {
 	 transform: translateY(100vh);
 	 transition: all .4s ease;
-	 animation: slide-y .4s ease 2.6s forwards;
+	 animation: slide-y .4s ease 3.4s forwards;
      }
 
      #work svg {
 	 opacity: 0;
 	 transition: all .5s ease;
-	 animation: fade-out .5s ease 2.7s infinite;
+	 animation: fade-out .5s ease 3.5s infinite;
      }
 
     #work svg:nth-child(2) {
-	animation-delay: 2.9s;
+	animation-delay: 3.6s;
     }
 
     #work svg:nth-child(3) {
-	animation-delay: 3s;
+	animation-delay: 3.7s;
     }
 
     .project-box {
@@ -310,12 +315,13 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
-	padding: 20px;
-	border: 1px solid var(--color-text-secondary);
-	border-right: none;
-	border-left: none;
+	padding: 30px;
+	border: 1px solid transparent;
+	box-shadow: 0 0 10px 1px var(--color-shadow);
+	border-radius: 20px;
 	transform: translateX(-100%);
-	transition: border-color .4s ease;
+	transition: box-shadow .5s ease;
+	overflow-x: hidden;
     }
 
     .about-project p:first-of-type {
@@ -578,6 +584,17 @@
 	animation: scale-up .5s ease forwards,
 		   fade-in .1s ease forwards;
     }
+
+    #socials-bar svg {
+	color: var(--color-icon-lang);
+	cursor: pointer;
+    }
+
+    #interested {transform: translateX(-300%);}
+    #lets-work {opacity: 0;}
+    #send-email {scale: 0;}
+    #socials-bar {opacity: 0;}
+    #click-to-see {opacity: 0;}
 }
 
 @layer utilities {
@@ -594,7 +611,7 @@
     }
 
     .open-box {
-	border-bottom: transparent;
+	box-shadow: 0 0 10px 1px var(--color-icon-lang);
     }
     
     .hide-screen-left, .hide-screen-right {

@@ -3,6 +3,7 @@ import Project from "./Project.jsx";
 
 export default function Projects() {
     const [inFocus, setInFocus] = useState(null)
+    const [animationComplete, setAnimationComplete] = useState(false)
 
     const toggle_focus = name => {
 	setInFocus(prev => prev == name ? null : name)
@@ -10,6 +11,7 @@ export default function Projects() {
 
     useEffect(_ => {
 	const entries = Array.from(document.getElementsByClassName('project-box'))
+
 	entries.push(document.getElementById('personal-projects'))
 
 	const observer = new IntersectionObserver(entries => {
@@ -28,12 +30,13 @@ export default function Projects() {
 	    observer.observe(entry)
 	})
 
+
 	return _ => {
 	    entries.forEach(entry => {
 		observer.unobserve(entry)
 	    })
 	}
-    }, [inFocus])
+    }, [])
 
     useEffect(_ => {
 	if (JSON.parse(localStorage.getItem('scroll-snap'))) {
@@ -112,7 +115,7 @@ export default function Projects() {
     ]
 
     return (<div className="w-full flex flex-col gap-12">
-	<h1 id="personal-projects">Here are some of my personal projects</h1>
+	<h1 id="personal-projects" className="large">Here are some of my personal projects</h1>
 	{
 	    projects.map(project => {
 		return (

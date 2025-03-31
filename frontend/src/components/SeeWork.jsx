@@ -18,7 +18,7 @@ export default function SeeWork() {
     }, [])
 
     return (
-	<div id="work" className="flex items-center gap-4">
+	<div id="work" className="flex items-center gap-4 select-none">
 	    <p className={`${isScrolled && 'opacity-0'}`}>see more</p>
 
 	    <div className={`flex flex-col text-[var(--color-text-primary)] ${isScrolled && 'opacity-0'}`}>

@@ -21,7 +21,7 @@ export default function RandomQuote() {
 
     useEffect(_ => {
 	const delayTimeout = setTimeout(_ => setDelay(false), 500)
-	const fetchTimeout = setTimeout(async _ => await fetch_quote(), 800)
+	const fetchTimeout = setTimeout(async _ => await fetch_quote(), 500)
 
 	return _ => {
 	    clearTimeout(delayTimeout)
