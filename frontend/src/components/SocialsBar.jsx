@@ -1,4 +1,3 @@
-import { IoLogoInstagram } from "react-icons/io5";
 import { VscGithub } from "react-icons/vsc";
 import { CgMail } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
@@ -7,7 +6,6 @@ import { FaSquareFacebook } from "react-icons/fa6";
 
 export default function SocialsBar() {
     const socials = [
-	<IoLogoInstagram className="text-[3.6rem]"/>,
 	<VscGithub className="text-[3.2rem]"/>,
 	<CgMail className="text-[3.7rem]"/>,
 	<FaDiscord className="text-[3.4rem]"/>,
@@ -17,7 +15,7 @@ export default function SocialsBar() {
 
     return (
 	<div className="flex flex-col items-center gap-4 w-[80%] md:w-[40rem] select-none">
-	    <div id="socials-bar" className="rounded-xl shadow-md flex flex-wrap items-center justify-center gap-10 p-4 overflow-scroll">
+	    <div id="socials-bar" className="rounded-xl flex flex-wrap items-center justify-center gap-10 p-4 overflow-scroll">
 		{
 		    socials.map((social, index) => {
 			return (

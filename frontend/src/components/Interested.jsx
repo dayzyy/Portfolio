@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import ContactButton from "./ContactButton.jsx"
+import SocialsBar from "./SocialsBar.jsx"
 
 export default function Interested() {
     useEffect(_ => {
@@ -42,13 +43,15 @@ export default function Interested() {
 
     return (
 	<div>
-	    <div className="flex flex-col md:items-center gap-8">
-		<div className="flex flex-wrap gap-4">
-		    <h1 id="interested" className="large">Interested?</h1>
+	    <div className="flex flex-col items-center justify-around gap-20">
+		<div className="flex flex-col md:flex-row md:items-center gap-4">
+		    <h1 id="interested" className="large leading-1">Interested?</h1>
 		    <h1 id="lets-work" className="large text-[var(--color-icon-lang)]">Let's work together!</h1>
 		</div>
 
 		<ContactButton/>
+
+		<SocialsBar/>
 	    </div>
 	</div>
     )

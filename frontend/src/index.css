@@ -590,11 +590,14 @@
 	cursor: pointer;
     }
 
-    #interested {transform: translateX(-300%);}
+    #interested {transform: translateX(-100%);}
     #lets-work {opacity: 0;}
     #send-email {scale: 0;}
-    #socials-bar {opacity: 0;}
     #click-to-see {opacity: 0;}
+    #socials-bar {
+	opacity: 0;
+	box-shadow: 0 0 10px 3px var(--color-shadow);
+    }
 }
 
 @layer utilities {
@@ -736,6 +739,8 @@
     #fun-fact .text-container, #random-quote .text-container {
 	width: 60em;
     }
+
+    #interested {transform: translateX(-300%);}
 }
 
 @media (min-width: 768px) {
