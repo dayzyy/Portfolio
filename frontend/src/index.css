@@ -68,7 +68,7 @@
 	 user-select: none;
      }
 
-     svg:is(.socials){
+     a:is(.socials){
 	 color: var(--color-icon-social);
 	 font-size: 1.4rem;
 	 opacity: 0;
@@ -76,9 +76,8 @@
 	 cursor: pointer;
      }
 
-     svg:is(.socials):nth-of-type(2) {animation-delay: 2.1s;}
-     svg:is(.socials):nth-of-type(3) {animation-delay: 2.2s;}
-     svg:is(.socials):nth-of-type(4) {animation-delay: 2.3s;}
+     a:is(.socials):nth-of-type(2) {animation-delay: 2.1s;}
+     a:is(.socials):nth-of-type(3) {animation-delay: 2.2s;}
 
     [data-theme="original"] {
 	--color-bg: #475569;

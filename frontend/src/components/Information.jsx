@@ -1,7 +1,6 @@
 import { SlLocationPin } from "react-icons/sl";
 import { VscGithub } from "react-icons/vsc";
 import { CgMail } from "react-icons/cg";
-import { FaDiscord } from "react-icons/fa";
 import { ImLinkedin } from "react-icons/im";
 
 export default function Information() {
@@ -12,11 +11,12 @@ export default function Information() {
 		<p className="font-bold">Georgia/Tbilisi</p>
 	    </div>
 	    
-	    <div className="flex items-center gap-2">
-		<ImLinkedin className="socials text-[1.2rem]"/>
-		<VscGithub className="socials text[1rem]"/>
-		<FaDiscord className="socials"/>
-		<CgMail className="socials text-[1.6rem]"/>
+	    <div className="flex items-center gap-3">
+		<div className="flex items-center gap-2">
+		    <a className="socials" href="https://github.com/dayzyy"target="_blank" rel="noopener noreferrer"><VscGithub className="text-[1.3rem]"/></a>
+		    <a className="socials" href="mailto:manialuka19@gmail.com" target="_blank" rel="noopener noreferrer"><CgMail className="text-[1.6rem]"/></a>
+		    <a className="socials" href="" target="_blank" rel="noopener noreferrer"><ImLinkedin className="text-[1.2rem]"/></a>
+		</div>
 	    </div>
 	</div>
     )
