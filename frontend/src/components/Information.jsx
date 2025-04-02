@@ -15,7 +15,7 @@ export default function Information() {
 		<div className="flex items-center gap-2">
 		    <a className="socials" href="https://github.com/dayzyy"target="_blank" rel="noopener noreferrer"><VscGithub className="text-[1.3rem]"/></a>
 		    <a className="socials" href="mailto:manialuka19@gmail.com" target="_blank" rel="noopener noreferrer"><CgMail className="text-[1.6rem]"/></a>
-		    <a className="socials" href="" target="_blank" rel="noopener noreferrer"><ImLinkedin className="text-[1.2rem]"/></a>
+		    <a className="socials" href="https://www.linkedin.com/in/luka-mania-ab330a35a/" target="_blank" rel="noopener noreferrer"><ImLinkedin className="text-[1.2rem]"/></a>
 		</div>
 	    </div>
 	</div>

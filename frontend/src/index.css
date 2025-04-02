@@ -462,7 +462,7 @@
 	box-shadow: 7px 7px 10px var(--color-shadow);
     }
 
-    .mini-project {
+    .mini-project, #controler {
 	scale: 0;
 	transition: width .5s ease,
 		    height .2s ease,

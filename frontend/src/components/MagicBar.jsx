@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
-import { VscTerminalCmd } from "react-icons/vsc";
 import { TbTicTac } from "react-icons/tb";
 import { GiSlipknot } from "react-icons/gi";
 import { FaQuestion } from "react-icons/fa6";
 import { MdFormatQuote } from "react-icons/md";
+import { IoGameControllerOutline } from "react-icons/io5";
 
 import MiniProject from "./MiniProject";
-import CMD from "./CMD";
 import TicTacToe from "./TicTacToe";
 import HangMan from "./HangMan";
 import FunFact from "./FunFact";
@@ -16,7 +15,6 @@ import Modal from "./Modal";
 
 export default function MagicBar({mobile_screen}) {
     const [inFocus, setInFocus] = useState(null)
-    const [areScaled, setAreScaled] = useState(false)
 
     useEffect(_ => {
 	const observer = new IntersectionObserver(entries => {
@@ -25,14 +23,12 @@ export default function MagicBar({mobile_screen}) {
 		    entry.target.style.animation = 'slide-y .5s ease .7s forwards'
 		} else if (entry.isIntersecting) {
 		    entry.target.style.animation = `scale-up .5s ease ${(3 + index) / 10}s forwards`
-		    if (index == entries.length - 2) {
-			setTimeout(_ => setAreScaled(true), 1100)
-		    }
 		}
 	    })
 	})
 
-	const entries = Array.from(document.querySelectorAll('.mini-project'))
+	const projects = Array.from(document.querySelectorAll('.mini-project'))
+	const entries = [document.getElementById('controler')].concat(projects)
 	entries.push(document.getElementById('magic-bar'))
 
 	entries.forEach(entry => observer.observe(entry))
@@ -41,7 +37,6 @@ export default function MagicBar({mobile_screen}) {
     }, [])
 
     const mini_projects = [
-	{icon: <VscTerminalCmd/>, description: 'cmd emulator', exe: <CMD/>},
 	{icon: <TbTicTac/>, description: 'play tic-tac-toe', exe: <TicTacToe/>},
 	{icon: <GiSlipknot/>, description: 'play hang-man', exe: <HangMan/>},
 	{icon: <FaQuestion/>, description: 'get a fun fact', exe: <FunFact/>},
@@ -57,11 +52,11 @@ export default function MagicBar({mobile_screen}) {
 	}
 
 	<div id="magic-bar" className="relative h-[4rem] w-full bg-[var(--color-bg-sidebar)] rounded-xl flex justify-around items-center">
+	    <IoGameControllerOutline id="controler" className="text-[2rem] text-[var(--color-icon-program)]"/>
 	    {
 		mini_projects.map(project => {
 		    return (
 			<MiniProject 
-			    scaled={areScaled}
 			    key={project.description}
 			    icon={project.icon}
 			    description={project.description}
@@ -83,6 +78,7 @@ export default function MagicBar({mobile_screen}) {
 	}
 
 	<div id="magic-bar" className="self-center h-[80%] w-[5rem] bg-[var(--color-bg-sidebar)] rounded-xl flex flex-col justify-around items-center">
+	    <IoGameControllerOutline id="controler" className="text-[2rem] text-[var(--color-icon-program)]"/>
 	    {
 		mini_projects.map(project => {
 		    return (

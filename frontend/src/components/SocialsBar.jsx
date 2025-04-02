@@ -33,7 +33,7 @@ export default function SocialsBar() {
 	    }
 	    <FaDiscord className="text-[3.4rem]" onClick={handle_click}/>
 	</div>,
-	<a href="" target="_blank" rel="noopener noreferrer"><ImLinkedin className="text-[3rem]"/></a>,
+	<a href="https://www.linkedin.com/in/luka-mania-ab330a35a/" target="_blank" rel="noopener noreferrer"><ImLinkedin className="text-[3rem]"/></a>,
 	<a href="https://www.facebook.com/luka.mania.3745/" target="_blank" rel="noopener noreferrer"><FaSquareFacebook className="text-[3.5rem]"/></a>
     ]
 
