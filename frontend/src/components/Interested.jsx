@@ -11,16 +11,13 @@ export default function Interested() {
 			entry.target.style.animation = 'slide-x .4s ease forwards'
 		    }
 		    else if (entry.target.id == 'lets-work') {
-			entry.target.style.animation = 'fade-in .4s ease .6s forwards'
+			entry.target.style.animation = 'fade-in .4s ease .5s forwards'
 		    }
 		    else if (entry.target.id == 'send-email') {
-			entry.target.style.animation = 'scale-up .4s ease 1s forwards'
+			entry.target.style.animation = 'scale-up .4s ease .6s forwards'
 		    }
-		    else if (entry.target.id == 'socials-bar') {
-			entry.target.style.animation = 'fade-in .4s ease 1.2s forwards'
-		    }
-		    else if (entry.target.id == 'click-to-see') {
-			entry.target.style.animation = 'fade-in .4s ease 1.4s forwards'
+		    else if (entry.target.id == 'socials-box') {
+			entry.target.style.animation = 'fade-in .4s ease .6s forwards'
 		    }
 		}
 	    })
@@ -30,8 +27,7 @@ export default function Interested() {
 	    document.getElementById('interested'),
 	    document.getElementById('lets-work'),
 	    document.getElementById('send-email'),
-	    document.getElementById('socials-bar'),
-	    document.getElementById('click-to-see')
+	    document.getElementById('socials-box'),
 	]
 	
 	entries.forEach(entry => observer.observe(entry))
@@ -42,8 +38,7 @@ export default function Interested() {
     }, [])
 
     return (
-	<div>
-	    <div className="flex flex-col items-center justify-around gap-20">
+	    <div className="w-full flex flex-col items-center justify-around gap-20">
 		<div className="flex flex-col md:flex-row md:items-center gap-4">
 		    <h1 id="interested" className="large leading-1">Interested?</h1>
 		    <h1 id="lets-work" className="large text-[var(--color-icon-lang)]">Let's work together!</h1>
@@ -53,6 +48,5 @@ export default function Interested() {
 
 		<SocialsBar/>
 	    </div>
-	</div>
     )
 }

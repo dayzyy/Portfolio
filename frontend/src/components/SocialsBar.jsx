@@ -38,7 +38,7 @@ export default function SocialsBar() {
     ]
 
     return (
-	<div className="flex flex-col items-center gap-4 w-[80%] md:w-[40rem] select-none">
+	<div id="socials-box"  className="flex flex-col items-center gap-4 max-w-[80%] select-none">
 	    <div id="socials-bar" className="rounded-xl flex flex-wrap items-center justify-center gap-10 p-4">
 		{
 		    socials.map((social, index) => {
@@ -50,8 +50,7 @@ export default function SocialsBar() {
 		    })
 		}
 	    </div>
-
-	    <p id="click-to-see" className="font-bold">You can also find me here</p>
+	    <p className="font-bold">You can also find me here</p>
 	</div>
     )
 }

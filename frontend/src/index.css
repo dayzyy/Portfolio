@@ -592,9 +592,8 @@
     #interested {transform: translateX(-100%);}
     #lets-work {opacity: 0;}
     #send-email {scale: 0;}
-    #click-to-see {opacity: 0;}
+    #socials-box {opacity: 0;}
     #socials-bar {
-	opacity: 0;
 	box-shadow: 0 0 10px 3px var(--color-shadow);
     }
 }
