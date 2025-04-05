@@ -19,8 +19,6 @@ export default function Interested() {
 		    else if (entry.target.id == 'socials-box') {
 			entry.target.style.animation = 'fade-in .4s ease .6s forwards'
 		    }
-		} else {
-		    entry.target.style.animation = ''
 		}
 	    })
 	})
