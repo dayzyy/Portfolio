@@ -14,11 +14,13 @@ export default function Interested() {
 			entry.target.style.animation = 'fade-in .4s ease .5s forwards'
 		    }
 		    else if (entry.target.id == 'send-email') {
-			entry.target.style.animation = 'scale-up .4s ease .6s forwards'
+			entry.target.style.animation = 'scale-up .2s ease .6s forwards'
 		    }
 		    else if (entry.target.id == 'socials-box') {
 			entry.target.style.animation = 'fade-in .4s ease .6s forwards'
 		    }
+		} else {
+		    entry.target.style.animation = ''
 		}
 	    })
 	})
