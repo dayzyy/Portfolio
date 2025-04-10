@@ -24,7 +24,7 @@ export default function SocialsBar() {
 
     const socials = [
 	<a href="https://github.com/dayzyy"target="_blank" rel="noopener noreferrer"><VscGithub className="text-[3.2rem]"/></a>,
-	<a href="mailto:manialuka19@gmail.com" target="_blank" rel="noopener noreferrer"><CgMail className="text-[3.7rem]"/></a>,
+	<a href="mailto:lukamania.dev@gmail.com" target="_blank" rel="noopener noreferrer"><CgMail className="text-[3.7rem]"/></a>,
 	<div className="relative grid place-items-center">
 	    {showAlert && 
 		<div className={`absolute w-fit -top-10 z-20 bg-[var(--color-bg-sidebar)] py-1 px-3 rounded-xl`}>

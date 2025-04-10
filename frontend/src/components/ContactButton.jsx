@@ -3,7 +3,7 @@ import { FaArrowCircleRight } from "react-icons/fa";
 export default function ContactButton() {
     return (
 	<a className="!no-underline"
-	   href="mailto:manialuka19@gmail.com"
+	   href="mailto:lukamania.dev@gmail.com"
 	   target="_blank"
 	   rel="noopener noreferrer"
 	>
