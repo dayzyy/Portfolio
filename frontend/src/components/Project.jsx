@@ -1,163 +1,164 @@
 import { useEffect, useRef, useState } from "react";
-import { TbCaretDownFilled } from "react-icons/tb";
-import ImageGallery from "./ImageGallery.jsx"
+import ImageGallery from "./ImageGallery.jsx";
+import DropDownMenu from "./DropDownMenu.jsx";
+import InfoCards from "./InfoCards.jsx";
+
+import { observe, unobserve } from "../utils/sectionObserver.js";
 
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
-export default function Project({name, description, screenshots, link, is_shown, on_toggle}) {
-    const [offScreen, setOffScreen] = useState(true)
-    const [showContent, setShowContent] = useState(false)
-    const [inFocus, setInFocus] = useState(0)
-    const [focusToggler, setFocusToggler] = useState(null)
-    const changedManually = useRef(false)
-    const [showGallery, setShowGallery] = useState(false)
-    const [vpMobile, setVpMobile] = useState(window.innerWidth <= 600)
+export default function Project({ project }) {
+	const [inFocus, setInFocus] = useState(0);
+	const [showGallery, setShowGallery] = useState(false);
+	const [vpMobile, setVpMobile] = useState(window.innerWidth <= 768);
+	const changeFocusTimer = useRef(null);
+	const changedManually = useRef(false);
+	const sectionRef = useRef(null);
+	const [isVisible, setIsVisible] = useState(false)
 
-    const handle_click_project = _ => {
-	on_toggle()
-	setInFocus(0)
-    }
+	const handle_click_image = (index) => {
+		if (inFocus != index) {
+			setInFocus(index);
+			changedManually.current = true;
+		} else {
+			setShowGallery(true);
+		}
+	};
 
-    const handle_click_image = index => {
-	if(inFocus != index) {
-	    setInFocus(index)
+	const handle_click_arrow = (event, to) => {
+		event.stopPropagation();
+		setInFocus((prev) => prev + to);
+		changedManually.current = true;
+	};
 
-	    setFocusToggler(prev => {
-		if (prev) clearInterval(prev)
-		return null
-	    })
-	    changedManually.current = true
-	}
-	else {
-	    setShowGallery(true)
+	useEffect(() => {
+		const element = sectionRef.current
+		observe(element, setIsVisible)
+		return () => unobserve(element)
+	}, [])
 
-	    setFocusToggler(prev => {
-		if (prev) clearInterval(prev)
-		return null
-	    })
-	}
-    }
+	useEffect(() => {
+		if (showGallery || !isVisible) return;
 
-    const handle_click_arrow = (event, to) => {
-	event.stopPropagation()
-	setInFocus(prev => prev + to)
-	changedManually.current = true
-    }
+		if (changedManually.current) changedManually.current = false;
 
-    useEffect(_ => {
-	if (is_shown) {
-	    setOffScreen(false)
-	    setTimeout(_ => setShowContent(true), 100)
-	} else {
-	    setShowContent(false)
-	    setTimeout(_ => setOffScreen(true), 300)
-	}
-    }, [is_shown])
+		 changeFocusTimer.current = setInterval((_) => {
+			setInFocus((prev) =>
+				prev !== project.screenshots.names.length - 1 ? prev + 1 : 0,
+			);
+		}, 1300);
 
-    useEffect(() => {
-	if(showGallery) return
+		return (_) => clearInterval(changeFocusTimer.current);
+	}, [showGallery, isVisible]); // Reseting the interval when the screenshots are interacted with (gallery opened or switched manually)
 
-	if (!is_shown) {
-	    setFocusToggler(prev => {
-		if (prev) clearInterval(prev)
-		return null
-	    })
-	    return
-	}
+	useEffect((_) => {
+			const handle_resize = (_) => {
+				setVpMobile(window.innerWidth < 768);
+			};
 
-	if (changedManually.current) changedManually.current = false
-
-	const interval = setInterval( _ => {
-	    setInFocus(prev => (prev !== screenshots.names.length - 1 ? prev + 1 : 0))
-	}, 2000)
-	setFocusToggler(interval)
-
-	return _ => clearInterval(interval)
-    }, [is_shown, changedManually.current, showGallery])
-
-    useEffect(_ => {
-	const handle_resize = _ => {
-	    setVpMobile(window.innerWidth < 600)
-	}
-
-	if (is_shown) {
-	    window.addEventListener('resize', handle_resize)
-	} else {
-	    window.removeEventListener('resize', handle_resize)
-	}
-
-	return _ => window.removeEventListener('resize', handle_resize)
-    }, [is_shown])
-
-    return (<>
-	{
-	    showGallery &&
-	    <ImageGallery images={screenshots}
-			  focused_image={inFocus}
-			  toggle_off={_ => setShowGallery(false)}
-			  vp_mobile={vpMobile}
-	    />
-	}
-
-	<div id={name} className={`project-box ${is_shown ? 'open-box' : ''} ${offScreen ? 'cursor-pointer' : ''}`}
-	    onClick={offScreen ? handle_click_project : null}	
-	>
-	    <div onClick={e => {e.stopPropagation(); handle_click_project()}} className={`w-full flex justify-between items-center cursor-pointer select-none`}>
-		<h1 className="text-[var(--color-icon-lang)]">{name}</h1>
-
-		<div className="about-icon flex gap-1 items-center">
-		    <TbCaretDownFilled className={`${!is_shown ? '-rotate-90' : 'rotate-0'}`}/>
-		</div>
-	    </div>
-
-	    {!offScreen &&
-		<div className={`${showContent ? 'go-on-screen' : ''} project-desc flex flex-col gap-16`}>
-		    <div className={`about-project flex flex-col gap-4`}>
-			{description}
-			<p><a href={link}>{link}</a></p>
-		    </div>
-
-		    <div className={`screenshots relative flex flex-col gap-4 items-center w-full h-fit self-center overflow-x-hidden`}>
-			{
-			    screenshots.names.map((screen, index) => {
-				return (
-				    <img 
-					key={screen}
-					className={`${vpMobile ? 'mobile-screenshot' : 'desktop-screenshot'} rounded cursor-pointer
-						    ${inFocus == index 
-						      ? 'show-screen border border-rounded border-[var(--color-bg-card)]'
-						      : (index < inFocus ? 'hide-screen-left' : 'hide-screen-right')}`}
-					style={index == inFocus + 1 ? {zIndex: index * 200} : {zIndex: index * 10}}
-					src={`screenshots/${screenshots.dir}/${vpMobile ? 'mobile' : 'desktop'}/${screen}`}
-					onClick={_ => handle_click_image(index)}
-				    />
-				)
-			    })
+			if (isVisible) {
+				window.addEventListener("resize", handle_resize);
+			} else {
+				window.removeEventListener("resize", handle_resize);
+				clearInterval(changeFocusTimer.current)
 			}
 
-			{
-			    vpMobile && 
-			    <div className="flex w-5/6 justify-around">
-				<FaAngleLeft className={`arrow ${inFocus == 0 && 'opacity-50'}`}
-					     onClick={inFocus == 0
-						 ? e => e.stopPropagation()
-						 : e => handle_click_arrow(e, -1)
-					     }
-				/>
+			return (_) => window.removeEventListener("resize", handle_resize);
+	}, [isVisible]);
 
-				<FaAngleRight className={`arrow ${inFocus == (screenshots.names.length - 1) && 'opacity-[.1]'}`}
-					      onClick={inFocus == (screenshots.names.length - 1)
-						  ? e => e.stopPropagation()
-						  : e => handle_click_arrow(e, 1)
-					      }
+	return (
+		<section ref={sectionRef} id={project.name} className="section w-[100dvw] h-[100dvh] flex flex-col md:flex-row md:gap-12 p-4">
+			{showGallery && (
+				<ImageGallery
+					images={project.screenshots}
+					focused_image={inFocus}
+					toggle_off={(_) => setShowGallery(false)}
+					vp_mobile={vpMobile}
 				/>
-			    </div>
-			}
-		    </div>
-		</div>
-	    }
+			)}
 
-	</div>
-    </>)
+			{vpMobile && <h1 className="large text-[var(--color-icon-lang)]">{project.name}</h1>}
+
+			<div className="relative flex-grow-0 md:h-full flex flex-col gap-2 md:gap-0 md:justify-around items-start">
+				<DropDownMenu
+					title="Features"
+					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.features}/>}
+					keep_open={!vpMobile}
+				/>
+				<DropDownMenu
+					title="What i achieved"
+					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.learnt}/>}
+					keep_open={!vpMobile}
+				/>
+				<DropDownMenu
+					title="Technologies used"
+					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.technologies}/>}
+					keep_open={!vpMobile}
+				/>
+			</div>
+
+			<div className="flex-grow flex flex-col gap-4 justify-around items-start mt-5">
+				{!vpMobile && <h1 className="large text-[var(--color-icon-lang)]">{project.name}</h1>}
+
+				{!showGallery && // Display screenshots only when the gallery is toggled off
+					<>
+						<div className="h-0 flex-grow screenshots relative w-full overflow-x-hidden flex flex-col items-center self-center overflow-x-hidden">
+							{project.screenshots.names.map((screen, index) => {
+								return (
+									<img
+										key={screen}
+										className={`${vpMobile ? 'max-h-full' : 'max-h-full'} rounded cursor-pointer
+									${
+											inFocus == index
+												? "show-screen border border-rounded border-[var(--color-bg-card)]"
+												: index < inFocus
+													? "hide-screen-left"
+													: "hide-screen-right"
+										}`}
+										style={
+											index == inFocus + 1
+												? { zIndex: index * 200 }
+												: { zIndex: index * 10 }
+										}
+										src={`screenshots/${project.screenshots.dir}/${vpMobile ? "mobile" : "desktop"}/${screen}`}
+										onClick={(_) => handle_click_image(index)}
+									/>
+								);
+							})}
+						</div>
+
+						{vpMobile && (
+							<div className="min-h-fit flex flex-col items-center w-full">
+								<div className="flex w-5/6 justify-around">
+									<FaAngleLeft
+										className={`arrow ${inFocus == 0 && "opacity-50"}`}
+										onClick={
+											inFocus == 0
+												? (e) => e.stopPropagation()
+												: (e) => handle_click_arrow(e, -1)
+										}
+									/>
+
+									<FaAngleRight
+										className={`arrow ${inFocus == (project.screenshots.names.length - 1) && "opacity-[.1]"}`}
+										onClick={
+											inFocus == project.screenshots.names.length - 1
+												? (e) => e.stopPropagation()
+												: (e) => handle_click_arrow(e, 1)
+										}
+									/>
+								</div>
+
+								<a className="self-end" href={project.link}>{project.link}</a>
+							</div>
+						)}
+					</>
+				}
+
+				{!vpMobile && <a className="self-end" href={project.link}>{project.link}</a>}
+			</div>
+
+		</section>
+	);
 }
