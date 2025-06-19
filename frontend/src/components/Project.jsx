@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import ImageGallery from "./ImageGallery.jsx";
-import DropDownMenu from "./DropDownMenu.jsx";
-import InfoCards from "./InfoCards.jsx";
 
 import { observe, unobserve } from "../utils/sectionObserver.js";
 
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import DropDowns from "./DropDowns.jsx";
 
 export default function Project({ project }) {
 	const [inFocus, setInFocus] = useState(0);
@@ -80,23 +79,7 @@ export default function Project({ project }) {
 
 			{vpMobile && <h1 className="large text-[var(--color-icon-lang)]">{project.name}</h1>}
 
-			<div className="relative flex-grow-0 md:h-full flex flex-col gap-2 md:gap-0 md:justify-around items-start">
-				<DropDownMenu
-					title="Features"
-					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.features}/>}
-					keep_open={!vpMobile}
-				/>
-				<DropDownMenu
-					title="What i achieved"
-					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.learnt}/>}
-					keep_open={!vpMobile}
-				/>
-				<DropDownMenu
-					title="Technologies used"
-					content={<InfoCards maxWidth={15 * 16} maxHeight={11.2 * 16} infoItems={project.technologies}/>}
-					keep_open={!vpMobile}
-				/>
-			</div>
+			<DropDowns vpMobile={vpMobile} project={project}/>
 
 			<div className="flex-grow flex flex-col gap-4 justify-around items-start mt-5">
 				{!vpMobile && <h1 className="large text-[var(--color-icon-lang)]">{project.name}</h1>}
