@@ -16,6 +16,8 @@ export default function Theme() {
 		} catch(error) {
 			return {name: "retro", color: "#C2410C"}
 		}
+
+		return {name: "retro", color: "#C2410C"}
 	});
 
 	const [themeName, setThemeName] = useState(theme.name)
