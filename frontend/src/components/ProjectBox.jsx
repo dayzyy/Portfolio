@@ -9,7 +9,7 @@ const ProjectBox = ({ project }) => {
 	}
 
 	return (
-		<div className="relative w-full h-full" onClick={scroll_to_project_page}>
+		<div className="relative w-full" onClick={scroll_to_project_page}>
 			<img
 				src={`/Portfolio/screenshots/${project.screenshots.dir}/desktop/display.png`}
 				className="w-full h-full object-cover"

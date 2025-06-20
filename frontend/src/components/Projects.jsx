@@ -2,7 +2,10 @@ import { useEffect, useRef } from "react";
 import ProjectBox from "./ProjectBox";
 import Project from "./Project";
 
+import {useResolution} from "../contexts/ResolutionContext.jsx"
+
 export default function Projects() {
+	const {windowWidth, windowHeight} = useResolution()
 	const gridRef = useRef(null)
 
 	useEffect((_) => {
@@ -182,13 +185,19 @@ export default function Projects() {
 		},
 	];
 
+	const side = Math.min(windowWidth * .9, windowHeight * .8)
+
 	return (
 		<div>
 			<section className="section w-screen h-screen flex flex-col items-center justify-center gap-10">
 				<h1 id="personal-projects" className="large text-center">
 					Here are some of my personal projects
 				</h1>
-				<div ref={gridRef} className="w-[20rem] h-[20rem] md:w-[25rem] md:h-[25rem] lg:w-[30rem] lg:h-[30rem] border border-black grid grid-cols-2 gap-[1rem]">
+				<div
+				ref={gridRef}
+				style={{width: `${side}px`, height: `${side}px`}}
+				className="max-w-[90%] md:max-w-[700px] grid grid-cols-2 gap-[1rem]"
+				>
 					{projects.map((project) => (
 						<ProjectBox project={project} key={project.name} />
 					))}
