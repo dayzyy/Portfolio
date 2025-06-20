@@ -12,14 +12,22 @@ export default function Project({ project }) {
 	const [showGallery, setShowGallery] = useState(false);
 	const [vpMobile, setVpMobile] = useState(window.innerWidth <= 768);
 	const changeFocusTimer = useRef(null);
-	const changedManually = useRef(false);
 	const sectionRef = useRef(null);
 	const [isVisible, setIsVisible] = useState(false)
+
+	const reset_interval = () => {
+		clearInterval(changeFocusTimer.current)
+		 changeFocusTimer.current = setInterval((_) => {
+			setInFocus((prev) =>
+				prev !== project.screenshots.names.length - 1 ? prev + 1 : 0
+			);
+		}, 1300);
+	}
 
 	const handle_click_image = (index) => {
 		if (inFocus != index) {
 			setInFocus(index);
-			changedManually.current = true;
+			reset_interval()
 		} else {
 			setShowGallery(true);
 		}
@@ -28,7 +36,7 @@ export default function Project({ project }) {
 	const handle_click_arrow = (event, to) => {
 		event.stopPropagation();
 		setInFocus((prev) => prev + to);
-		changedManually.current = true;
+		reset_interval()
 	};
 
 	useEffect(() => {
@@ -40,16 +48,14 @@ export default function Project({ project }) {
 	useEffect(() => {
 		if (showGallery || !isVisible) return;
 
-		if (changedManually.current) changedManually.current = false;
-
 		 changeFocusTimer.current = setInterval((_) => {
 			setInFocus((prev) =>
-				prev !== project.screenshots.names.length - 1 ? prev + 1 : 0,
+				prev !== project.screenshots.names.length - 1 ? prev + 1 : 0
 			);
 		}, 1300);
 
 		return (_) => clearInterval(changeFocusTimer.current);
-	}, [showGallery, isVisible]); // Reseting the interval when the screenshots are interacted with (gallery opened or switched manually)
+	}, [showGallery, isVisible]);
 
 	useEffect((_) => {
 			const handle_resize = (_) => {
