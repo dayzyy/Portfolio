@@ -12,16 +12,12 @@ import ListItem from "./components/ListItem.jsx";
 import MagicBar from "./components/MagicBar.jsx";
 import Interested from "./components/Interested.jsx";
 
+import { useResolution } from "./contexts/ResolutionContext.jsx";
+
 export default function App() {
-	const [wpMobile, setWpMobile] = useState(window.innerWidth < 768);
+	const {windowWidth} = useResolution()
 
 	useEffect((_) => {
-		const handle_resize = (_) => {
-			setWpMobile(window.innerWidth < 768);
-		};
-
-		window.addEventListener("resize", handle_resize);
-
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
@@ -37,7 +33,6 @@ export default function App() {
 
 		return (_) => {
 			elements_to_animate.forEach((entry) => observer.unobserve(entry));
-			window.removeEventListener("resize", handle_resize);
 		};
 	}, []);
 
@@ -77,12 +72,14 @@ export default function App() {
 					</div>
 				</section>
 
-				<section className="flex-grow flex md:justify-center">
-					<div id="skills" className="flex flex-col gap-4">
-						<h1>Languages and frameworks im proficient in</h1>
-						<Skills />
-					</div>
-				</section>
+				{windowWidth > 768 &&
+					<section className="flex-grow flex md:justify-center">
+						<div id="skills" className="flex flex-col gap-4">
+							<h1>Languages and frameworks im proficient in</h1>
+							<Skills />
+						</div>
+					</section>
+				}
 
 				<section className="w-full flex items-center justify-between pl-8">
 					<Theme />
@@ -90,12 +87,27 @@ export default function App() {
 				</section>
 			</div>
 
+			{windowWidth < 768 &&
+				<div className="section min-h-screen w-screen p-4">
+					<div className="flex flex-col gap-[3rem]">
+						<div className="flex justify-end">
+							<ToggleScroll/>
+						</div>
+
+						<div id="skills" className="flex flex-col gap-4">
+							<h1>Technologies i use</h1>
+							<Skills />
+						</div>
+					</div>
+				</div>
+			}
+
 			<div className="section min-h-screen w-screen p-4 md:px-12 bg-[var(--color-bg-card)] grid place-items-center">
 				<section className="w-full h-full flex flex-col gap-12 md:gap-0">
-					<ToggleScroll />
+					{windowWidth > 768 && <ToggleScroll />}
 
 					<div className="flex-grow flex">
-						<div className="flex-grow w-full flex flex-col justify-around gap-12 md:gap-0">
+						<div className="flex-grow w-full flex flex-col justify-around">
 							<div className="flex flex-col justify-center gap-6">
 								<h1 className="slide-in-view-left">
 									{" "}
@@ -126,10 +138,10 @@ export default function App() {
 								</div>
 							</div>
 
-							{wpMobile && <MagicBar mobile_screen={wpMobile} />}
+							{windowWidth < 768 && <MagicBar mobile_screen={true} />}
 						</div>
 
-						{!wpMobile && <MagicBar mobile_screen={wpMobile} />}
+						{!(windowWidth < 768) && <MagicBar mobile_screen={false} />}
 					</div>
 				</section>
 			</div>
