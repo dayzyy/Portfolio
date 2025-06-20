@@ -1,3 +1,5 @@
+import React from "react";
+
 const ProjectBox = ({ project }) => {
 	const scroll_to_project_page = () => {
 		const section = document.getElementById(project.name)
