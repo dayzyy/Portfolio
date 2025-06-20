@@ -48,9 +48,9 @@ export default function App() {
 					<div className="flex flex-col gap-4 w-full md:w-[600px]">
 						<div id="intro" className="flex items-center justify-between">
 							<div className="flex flex-col gap-0">
-								<p className="trim text-[var(--color-text-greet)]">hi, i am</p>
+								<p className="trim text-[var(--color-text-greet)] select-none">hi, i am</p>
 								<h1 className="trim">Luka Mania</h1>
-								<h3 className="trim text-[var(--color-text-secondary)]">
+								<h3 className="trim text-[var(--color-text-secondary)] select-none">
 									Web Developer
 								</h3>
 							</div>
@@ -74,7 +74,7 @@ export default function App() {
 
 				{windowWidth > 768 &&
 					<section className="flex-grow flex md:justify-center">
-						<div id="skills" className="flex flex-col gap-4">
+						<div id="skills" className="flex flex-col gap-4 select-none">
 							<h1>Languages and frameworks im proficient in</h1>
 							<Skills />
 						</div>
@@ -94,7 +94,7 @@ export default function App() {
 							<ToggleScroll/>
 						</div>
 
-						<div id="skills" className="flex flex-col gap-4">
+						<div id="skills" className="flex flex-col gap-4 select-none">
 							<h1>Technologies i use</h1>
 							<Skills />
 						</div>

@@ -26,7 +26,7 @@ export default function Logo() {
 	}, []);
 
 	return (
-		<div id="logo" className="flex gap-[.1rem] items-end">
+		<div id="logo" className="flex gap-[.1rem] items-end select-none">
 			<h1>{"<"}</h1>
 			<h1>{text.join("")}</h1>
 			{!hideCursor && (

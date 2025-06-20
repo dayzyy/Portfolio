@@ -4,7 +4,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const DropDownMenu = ({title, content, keep_open, interfere, onToggle}) => {
 
 	return (
-		<div className="relative min-w-fit cursor-pointer" onClick={onToggle}>
+		<div className={`relative min-w-fit select-none ${!keep_open ? 'cursor-pointer' : ''}`} onClick={onToggle}>
 			<div className="flex items-center">
 				<h2 className="whitespace-nowrap">{title}</h2>
 				{!keep_open && 

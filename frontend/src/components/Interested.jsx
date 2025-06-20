@@ -35,7 +35,7 @@ export default function Interested() {
 	}, []);
 
 	return (
-		<div className="w-full flex flex-col items-center justify-around gap-20">
+		<div className="w-full flex flex-col items-center justify-around gap-20 select-none">
 			<div className="flex flex-col md:flex-row md:items-center gap-4">
 				<h1 id="interested" className="large leading-1">
 					Interested?

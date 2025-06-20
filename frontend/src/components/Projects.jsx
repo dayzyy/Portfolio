@@ -190,7 +190,7 @@ export default function Projects() {
 	return (
 		<div>
 			<section className="section w-screen h-screen flex flex-col items-center justify-center gap-10">
-				<h1 id="personal-projects" className="large text-center">
+				<h1 id="personal-projects" className="large text-center select-none">
 					Here are some of my personal projects
 				</h1>
 				<div
