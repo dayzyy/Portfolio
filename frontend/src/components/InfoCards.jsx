@@ -1,6 +1,6 @@
-const InfoCards = ({maxWidth, maxHeight, infoItems}) => {
+const InfoCards = ({maxWidth, infoItems}) => {
 	return (
-		<div style={{maxWidth, maxHeight}} className="flex flex-wrap gap-3 overflow-y-scroll overscroll-contain">
+		<div style={{maxWidth}} className="flex flex-wrap gap-3 overflow-y-scroll overscroll-contain max-h-[20vh] min-h-[3rem]">
 			{infoItems.map((item) => {
 				return (
 					<div key={item} className="rounded w-fit p-2 bg-[var(--color-bg-sidebar)] shadow">
