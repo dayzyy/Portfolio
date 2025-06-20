@@ -77,6 +77,7 @@ export default function Projects() {
 					"chat.png",
 				],
 			},
+			suitableForMobile: true,
 			link: "https://github.com/dayzyy/API-SocialMediaApp",
 		},
 
@@ -111,6 +112,7 @@ export default function Projects() {
 					"shapes.png"
 				],
 			},
+			suitableForMobile: false,
 			link: "https://github.com/dayzyy/CanvasEditorApp",
 		},
 
@@ -144,6 +146,7 @@ export default function Projects() {
 					"info3.png",
 				],
 			},
+			suitableForMobile: true,
 			link: "https://github.com/dayzyy/API-WeatherForecastApp",
 		},
 
@@ -181,6 +184,7 @@ export default function Projects() {
 					"categories.png",
 				],
 			},
+			suitableForMobile: true,
 			link: "https://github.com/dayzyy/API-EcommerceApp",
 		},
 	];

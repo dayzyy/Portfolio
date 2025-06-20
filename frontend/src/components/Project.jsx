@@ -87,12 +87,13 @@ export default function Project({ project }) {
 
 			<DropDowns vpMobile={vpMobile} project={project}/>
 
-			<div className="flex-grow flex flex-col gap-4 justify-around items-start mt-5">
+			<div className="flex-grow flex flex-col gap-4 items-start mt-5">
 				{!vpMobile && <h1 className="large text-[var(--color-icon-lang)]">{project.name}</h1>}
 
 				{!showGallery && // Display screenshots only when the gallery is toggled off
 					<>
-						<div className="h-0 flex-grow screenshots relative w-full overflow-x-hidden flex flex-col items-center self-center overflow-x-hidden">
+						<div className={`screenshots relative w-full overflow-x-hidden flex flex-col items-center self-center overflow-x-hidden
+							${(vpMobile && !project.suitableForMobile) ? 'h-fit' : 'h-0 flex-grow'}`}>
 							{project.screenshots.names.map((screen, index) => {
 								return (
 									<img
@@ -110,7 +111,7 @@ export default function Project({ project }) {
 												? { zIndex: index * 200 }
 												: { zIndex: index * 10 }
 										}
-										src={`screenshots/${project.screenshots.dir}/${vpMobile ? "mobile" : "desktop"}/${screen}`}
+										src={`screenshots/${project.screenshots.dir}/${project.suitableForMobile && vpMobile ? "mobile" : "desktop"}/${screen}`}
 										onClick={(_) => handle_click_image(index)}
 									/>
 								);
@@ -138,6 +139,8 @@ export default function Project({ project }) {
 										}
 									/>
 								</div>
+
+								{(vpMobile && !project.suitableForMobile) && <p className="self-end">! this project is not suitable for mobile usage</p>}
 
 								<a className="self-end" href={project.link}>{project.link}</a>
 							</div>
