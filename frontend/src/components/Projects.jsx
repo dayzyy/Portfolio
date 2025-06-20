@@ -73,7 +73,6 @@ export default function Projects() {
 					"directs.png",
 					"chat.png",
 				],
-				display_img_name: "myprofile.png",
 			},
 			link: "https://github.com/dayzyy/API-SocialMediaApp",
 		},
@@ -108,7 +107,6 @@ export default function Projects() {
 					"images.png",
 					"shapes.png"
 				],
-				display_img_name: "images.png",
 			},
 			link: "https://github.com/dayzyy/CanvasEditorApp",
 		},
@@ -142,7 +140,6 @@ export default function Projects() {
 					"info2.png",
 					"info3.png",
 				],
-				display_img_name: "home2.png",
 			},
 			link: "https://github.com/dayzyy/API-WeatherForecastApp",
 		},
@@ -180,7 +177,6 @@ export default function Projects() {
 					"settings.png",
 					"categories.png",
 				],
-				display_img_name: "feed.png",
 			},
 			link: "https://github.com/dayzyy/API-EcommerceApp",
 		},
@@ -192,7 +188,7 @@ export default function Projects() {
 				<h1 id="personal-projects" className="large text-center">
 					Here are some of my personal projects
 				</h1>
-				<div ref={gridRef} className="w-[80%] md:w-[35%] grid grid-cols-2 gap-3">
+				<div ref={gridRef} className="w-[20rem] h-[20rem] md:w-[25rem] md:h-[25rem] lg:w-[30rem] lg:h-[30rem] border border-black grid grid-cols-2 gap-[1rem]">
 					{projects.map((project) => (
 						<ProjectBox project={project} key={project.name} />
 					))}

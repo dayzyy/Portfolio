@@ -6,7 +6,7 @@ const DropDowns = ({vpMobile, project}) => {
 	const [toggled, setToggled] = React.useState(0)
 
 	return (
-		<div className="relative flex-grow-0 md:h-full flex flex-col gap-2 md:gap-0 md:justify-around items-start overflow-hidden">
+		<div className="relative flex-grow-0 md:h-full flex flex-col gap-2 md:gap-0 md:justify-around items-start md:overflow-hidden">
 			<DropDownMenu
 				title="Features"
 				content={<InfoCards maxWidth={15 * 16} infoItems={project.features}/>}
